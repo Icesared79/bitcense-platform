@@ -63,7 +63,7 @@ export function Hero() {
 
             {/* Flow Diagram */}
             <div className="mt-12 bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg">
-              <div className="flex items-center justify-between gap-2 lg:gap-4">
+              <div className="flex items-start justify-between gap-2 lg:gap-4">
                 {/* Managers */}
                 <div className="flex-1 text-center">
                   <div className="w-16 h-16 lg:w-20 lg:h-20 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg">
@@ -75,8 +75,8 @@ export function Hero() {
                   <div className="text-xs lg:text-sm text-[#64748b] mt-0.5">Submit</div>
                 </div>
 
-                {/* Arrow */}
-                <div className="flex-shrink-0 flex items-center">
+                {/* Arrow - positioned to align with icon center */}
+                <div className="flex-shrink-0 flex items-center mt-7 lg:mt-9">
                   <div className="w-8 lg:w-12 h-0.5 bg-[#15803d]/40" />
                   <svg className="w-4 h-4 text-[#15803d] -ml-1" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
@@ -94,15 +94,15 @@ export function Hero() {
                   <div className="text-xs lg:text-sm text-[#64748b] mt-0.5">Qualify</div>
                 </div>
 
-                {/* Arrow */}
-                <div className="flex-shrink-0 flex items-center">
+                {/* Arrow - positioned to align with icon center */}
+                <div className="flex-shrink-0 flex items-center mt-7 lg:mt-9">
                   <div className="w-8 lg:w-12 h-0.5 bg-[#15803d]/40" />
                   <svg className="w-4 h-4 text-[#15803d] -ml-1" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </div>
 
-                {/* Global Investors */}
+                {/* Distribution */}
                 <div className="flex-1 text-center">
                   <div className="w-16 h-16 lg:w-20 lg:h-20 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg">
                     <svg className="w-8 h-8 lg:w-10 lg:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
