@@ -18,7 +18,7 @@ export function Footer() {
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#15803d] via-[#15803d]/50 to-[#15803d]" />
 
       {/* CTA Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight mb-6">
             Ready to Reach Global Investors?

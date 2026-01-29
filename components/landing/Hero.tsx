@@ -75,10 +75,10 @@ export function Hero() {
                   <div className="text-xs lg:text-sm text-[#64748b] mt-0.5">Submit</div>
                 </div>
 
-                {/* Arrow - positioned to align with icon center */}
+                {/* Arrow - yellow accent */}
                 <div className="flex-shrink-0 flex items-center mt-7 lg:mt-9">
-                  <div className="w-8 lg:w-12 h-0.5 bg-[#15803d]/40" />
-                  <svg className="w-4 h-4 text-[#15803d] -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-8 lg:w-12 h-0.5 bg-[#fde047]" />
+                  <svg className="w-4 h-4 text-[#fde047] -ml-1" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </div>
@@ -94,10 +94,10 @@ export function Hero() {
                   <div className="text-xs lg:text-sm text-[#64748b] mt-0.5">Qualify</div>
                 </div>
 
-                {/* Arrow - positioned to align with icon center */}
+                {/* Arrow - yellow accent */}
                 <div className="flex-shrink-0 flex items-center mt-7 lg:mt-9">
-                  <div className="w-8 lg:w-12 h-0.5 bg-[#15803d]/40" />
-                  <svg className="w-4 h-4 text-[#15803d] -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                  <div className="w-8 lg:w-12 h-0.5 bg-[#fde047]" />
+                  <svg className="w-4 h-4 text-[#fde047] -ml-1" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
                 </div>

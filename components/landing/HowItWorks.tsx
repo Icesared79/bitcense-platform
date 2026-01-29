@@ -35,56 +35,8 @@ export function HowItWorks() {
     },
   ]
 
-  const valueProps = [
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-      label: 'Licensed Global Partners',
-      desc: 'Regulated platforms worldwide',
-      bg: 'bg-[#15803d]/5',
-      iconBg: 'bg-[#15803d]',
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
-      label: 'Rigorous Qualification',
-      desc: 'AI + human oversight',
-      bg: 'bg-[#0f172a]/5',
-      iconBg: 'bg-[#0f172a]',
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-        </svg>
-      ),
-      label: 'Full Transparency',
-      desc: 'Track every stage',
-      bg: 'bg-[#15803d]/5',
-      iconBg: 'bg-[#15803d]',
-    },
-    {
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-        </svg>
-      ),
-      label: 'You Stay in Control',
-      desc: 'Your asset, your terms',
-      bg: 'bg-[#0f172a]/5',
-      iconBg: 'bg-[#0f172a]',
-    },
-  ]
-
   return (
-    <section id="how-it-works" className="py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-white relative">
+    <section id="how-it-works" className="py-40 lg:py-48 px-4 sm:px-6 lg:px-8 bg-white relative">
       {/* Top border accent */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e2e8f0] to-transparent" />
 
@@ -100,8 +52,8 @@ export function HowItWorks() {
 
         {/* Steps */}
         <div className="relative">
-          {/* Connection line */}
-          <div className="hidden lg:block absolute top-[60px] left-[20%] right-[20%] h-1 bg-gradient-to-r from-[#15803d]/30 via-[#0f172a]/20 to-[#15803d]/30 rounded-full" />
+          {/* Connection line - yellow accent */}
+          <div className="hidden lg:block absolute top-[60px] left-[20%] right-[20%] h-1 bg-gradient-to-r from-[#fde047] via-[#fef08a] to-[#fde047] rounded-full" />
 
           <div className="grid lg:grid-cols-3 gap-8">
             {steps.map((step) => (
@@ -119,22 +71,6 @@ export function HowItWorks() {
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Value props */}
-        <div className="mt-24 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {valueProps.map((item) => (
-            <div
-              key={item.label}
-              className={`${item.bg} rounded-2xl p-6 border border-[#e2e8f0] shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-1`}
-            >
-              <div className={`w-12 h-12 ${item.iconBg} rounded-xl flex items-center justify-center text-white mb-5 shadow-md`}>
-                {item.icon}
-              </div>
-              <div className="font-bold text-[#0f172a] text-lg mb-1">{item.label}</div>
-              <div className="text-base text-[#64748b]">{item.desc}</div>
-            </div>
-          ))}
         </div>
       </div>
     </section>
