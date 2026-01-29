@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
 export function Header() {
@@ -20,12 +21,14 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#4A7C59] to-[#3A6C49] rounded-xl flex items-center justify-center shadow-lg shadow-[#4A7C59]/25 group-hover:shadow-[#4A7C59]/40 transition-shadow">
-              <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <span className="text-xl font-bold text-gray-900">BitCense</span>
+            <Image
+              src="/logo-icon.png"
+              alt="BitCense"
+              width={36}
+              height={36}
+              className="group-hover:scale-105 transition-transform"
+            />
+            <span className="text-xl font-bold text-gray-900 tracking-wide">BITCENSE</span>
           </Link>
 
           <nav className="hidden md:flex items-center space-x-1">

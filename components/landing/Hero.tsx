@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { submitLead } from '@/app/actions/leads'
 
 const assetTypes = [
@@ -105,10 +106,14 @@ export function Hero() {
 
                 {/* BitCense */}
                 <div className="flex-1 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[#4A7C59] to-[#3A6C49] rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-[#4A7C59]/25">
-                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#4A7C59] to-[#3A6C49] rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-[#4A7C59]/25 p-3">
+                    <Image
+                      src="/logo-icon.png"
+                      alt="BitCense"
+                      width={40}
+                      height={40}
+                      className="invert brightness-200"
+                    />
                   </div>
                   <div className="font-semibold text-gray-900 text-sm">BitCense</div>
                   <div className="text-xs text-gray-500">Qualify & Package</div>
