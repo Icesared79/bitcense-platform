@@ -16,6 +16,15 @@ export function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const element = document.getElementById('get-started')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+    setMobileMenuOpen(false)
+  }
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg shadow-[#0f172a]/5' : 'bg-white/80 backdrop-blur-md'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,6 +61,7 @@ export function Header() {
             </Link>
             <a
               href="#get-started"
+              onClick={scrollToForm}
               className="bg-[#15803d] text-white px-6 py-3 rounded-xl text-base font-semibold hover:bg-[#166534] transition-all duration-200 shadow-md shadow-[#15803d]/20 hover:shadow-lg hover:shadow-[#15803d]/25 hover:-translate-y-0.5 active:translate-y-0"
             >
               Get Started
@@ -82,7 +92,11 @@ export function Header() {
               <a href="#team" className="text-[#334155] hover:text-[#0f172a] text-base font-medium py-2 transition-colors duration-200">Team</a>
               <div className="pt-4 border-t border-[#e2e8f0] flex flex-col space-y-3">
                 <Link href="/login" className="text-[#334155] text-base font-medium py-2">Log in</Link>
-                <a href="#get-started" className="bg-[#15803d] text-white px-6 py-3 rounded-xl text-base font-semibold text-center hover:bg-[#166534] transition-colors duration-200">
+                <a
+                  href="#get-started"
+                  onClick={scrollToForm}
+                  className="bg-[#15803d] text-white px-6 py-3 rounded-xl text-base font-semibold text-center hover:bg-[#166534] transition-colors duration-200"
+                >
                   Get Started
                 </a>
               </div>

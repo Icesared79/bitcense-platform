@@ -42,7 +42,7 @@ export function Hero() {
   return (
     <section id="get-started" className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
       {/* Background gradient */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-[#f8fafc] to-[#f1f5f9]">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-white to-[#f8fafc]">
         {/* Decorative shapes */}
         <div className="absolute top-20 left-0 w-[800px] h-[800px] bg-[#15803d]/[0.03] rounded-full blur-3xl -translate-x-1/2" />
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#0f172a]/[0.03] rounded-full blur-3xl translate-x-1/3" />
@@ -51,7 +51,7 @@ export function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* Left Side - Content & Visual */}
           <div className="order-2 lg:order-1">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[#0f172a] leading-[1.05] tracking-tight">
@@ -70,12 +70,12 @@ export function Hero() {
               {/* Background accent */}
               <div className="absolute -inset-4 bg-gradient-to-br from-[#15803d]/5 to-[#0f172a]/5 rounded-3xl" />
 
-              <div className="relative bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-xl">
-                <div className="flex items-center justify-between gap-4">
+              <div className="relative bg-white rounded-2xl p-10 lg:p-12 border border-[#e2e8f0] shadow-xl">
+                <div className="flex items-center justify-between gap-2 lg:gap-4">
                   {/* Asset Managers */}
                   <div className="flex-1 text-center">
-                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-[#0f172a]/20">
-                      <svg className="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-20 h-20 lg:w-28 lg:h-28 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-[#0f172a]/20">
+                      <svg className="w-10 h-10 lg:w-14 lg:h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                       </svg>
                     </div>
@@ -86,19 +86,19 @@ export function Hero() {
                   {/* Arrow */}
                   <div className="flex-shrink-0">
                     <div className="flex items-center">
-                      <div className="w-8 lg:w-16 h-1 bg-gradient-to-r from-[#0f172a]/30 to-[#15803d]/60 rounded-full" />
+                      <div className="w-6 lg:w-12 h-1 bg-gradient-to-r from-[#0f172a]/30 to-[#15803d]/60 rounded-full" />
                       <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-[#15803d] -ml-1" />
                     </div>
                   </div>
 
                   {/* BitCense */}
                   <div className="flex-1 text-center">
-                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#15803d] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-[#15803d]/30 p-4 lg:p-5">
+                    <div className="w-20 h-20 lg:w-28 lg:h-28 bg-[#15803d] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-[#15803d]/30 p-4 lg:p-6">
                       <Image
                         src="/logo-icon.png"
                         alt="BitCense"
-                        width={56}
-                        height={56}
+                        width={64}
+                        height={64}
                         className="invert brightness-200"
                       />
                     </div>
@@ -109,15 +109,15 @@ export function Hero() {
                   {/* Arrow */}
                   <div className="flex-shrink-0">
                     <div className="flex items-center">
-                      <div className="w-8 lg:w-16 h-1 bg-gradient-to-r from-[#15803d]/60 to-[#0f172a]/30 rounded-full" />
+                      <div className="w-6 lg:w-12 h-1 bg-gradient-to-r from-[#15803d]/60 to-[#0f172a]/30 rounded-full" />
                       <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-[#0f172a]/40 -ml-1" />
                     </div>
                   </div>
 
                   {/* Global Investors */}
                   <div className="flex-1 text-center">
-                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-[#0f172a]/20">
-                      <svg className="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-20 h-20 lg:w-28 lg:h-28 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-[#0f172a]/20">
+                      <svg className="w-10 h-10 lg:w-14 lg:h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
@@ -131,13 +131,13 @@ export function Hero() {
 
           {/* Right Side - Lead Capture Form */}
           <div className="order-1 lg:order-2">
-            <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl shadow-[#0f172a]/10 border border-[#e2e8f0] relative">
-              {/* Decorative accent */}
-              <div className="absolute top-0 left-8 right-8 h-1 bg-gradient-to-r from-[#15803d] to-[#0f172a] rounded-b-full" />
+            <div className="bg-white rounded-2xl p-8 lg:p-12 shadow-2xl shadow-[#0f172a]/10 border border-[#e2e8f0] relative overflow-hidden">
+              {/* Green accent line at top */}
+              <div className="absolute top-0 left-0 right-0 h-1 bg-[#15803d]" />
 
-              <div className="text-center mb-8 pt-2">
-                <h2 className="text-3xl font-bold text-[#0f172a]">Get Started</h2>
-                <p className="text-[#64748b] mt-2 text-lg">Tell us about your asset</p>
+              <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold text-[#0f172a]">Start Your Distribution</h2>
+                <p className="text-[#64748b] mt-2 text-lg">Takes less than 30 seconds</p>
               </div>
 
               {isSuccess ? (
@@ -166,7 +166,7 @@ export function Hero() {
                       id="asset_type"
                       name="asset_type"
                       required
-                      className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 transition-all appearance-none cursor-pointer hover:border-[#cbd5e1]"
+                      className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 focus:shadow-[0_0_0_4px_rgba(21,128,61,0.1)] transition-all appearance-none cursor-pointer hover:border-[#cbd5e1]"
                       style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
                     >
                       <option value="">Select asset type</option>
@@ -185,7 +185,7 @@ export function Hero() {
                         name="name"
                         required
                         placeholder="John Smith"
-                        className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 transition-all hover:border-[#cbd5e1]"
+                        className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 focus:shadow-[0_0_0_4px_rgba(21,128,61,0.1)] transition-all hover:border-[#cbd5e1]"
                       />
                     </div>
                     <div>
@@ -196,7 +196,7 @@ export function Hero() {
                         name="email"
                         required
                         placeholder="john@company.com"
-                        className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 transition-all hover:border-[#cbd5e1]"
+                        className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 focus:shadow-[0_0_0_4px_rgba(21,128,61,0.1)] transition-all hover:border-[#cbd5e1]"
                       />
                     </div>
                   </div>
@@ -208,7 +208,7 @@ export function Hero() {
                         id="location"
                         name="location"
                         required
-                        className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 transition-all appearance-none cursor-pointer hover:border-[#cbd5e1]"
+                        className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 focus:shadow-[0_0_0_4px_rgba(21,128,61,0.1)] transition-all appearance-none cursor-pointer hover:border-[#cbd5e1]"
                         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
                       >
                         <option value="">Select</option>
@@ -226,7 +226,7 @@ export function Hero() {
                         id="linkedin"
                         name="linkedin"
                         placeholder="linkedin.com/in/..."
-                        className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 transition-all hover:border-[#cbd5e1]"
+                        className="w-full px-4 py-4 bg-[#f8fafc] border border-[#e2e8f0] rounded-xl text-[#0f172a] text-base placeholder-[#94a3b8] focus:outline-none focus:border-[#15803d] focus:ring-2 focus:ring-[#15803d]/20 focus:shadow-[0_0_0_4px_rgba(21,128,61,0.1)] transition-all hover:border-[#cbd5e1]"
                       />
                     </div>
                   </div>
@@ -254,8 +254,8 @@ export function Hero() {
                     )}
                   </button>
 
-                  <p className="text-sm text-[#94a3b8] text-center">
-                    By submitting, you agree to our Terms of Service and Privacy Policy.
+                  <p className="text-sm text-[#64748b] text-center">
+                    No commitment required. Free qualification assessment.
                   </p>
                 </form>
               )}

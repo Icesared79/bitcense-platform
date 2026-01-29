@@ -10,7 +10,6 @@ export function HowItWorks() {
         </svg>
       ),
       iconBg: 'bg-[#15803d]',
-      shadowColor: 'shadow-[#15803d]/20',
     },
     {
       number: '02',
@@ -22,7 +21,6 @@ export function HowItWorks() {
         </svg>
       ),
       iconBg: 'bg-[#0f172a]',
-      shadowColor: 'shadow-[#0f172a]/20',
     },
     {
       number: '03',
@@ -34,7 +32,6 @@ export function HowItWorks() {
         </svg>
       ),
       iconBg: 'bg-[#15803d]',
-      shadowColor: 'shadow-[#15803d]/20',
     },
   ]
 
@@ -92,7 +89,7 @@ export function HowItWorks() {
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e2e8f0] to-transparent" />
 
       <div className="max-w-7xl mx-auto">
-        <div className="max-w-3xl mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#0f172a] leading-tight tracking-tight">
             Three Simple Steps to Global Distribution
           </h2>
@@ -109,7 +106,7 @@ export function HowItWorks() {
           <div className="grid lg:grid-cols-3 gap-8">
             {steps.map((step) => (
               <div key={step.number} className="relative group">
-                <div className={`bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg ${step.shadowColor} hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}>
+                <div className="bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
                   <div className="flex items-start justify-between mb-8">
                     <div className={`w-14 h-14 ${step.iconBg} rounded-xl flex items-center justify-center text-white shadow-lg`}>
                       {step.icon}
@@ -129,7 +126,7 @@ export function HowItWorks() {
           {valueProps.map((item) => (
             <div
               key={item.label}
-              className={`${item.bg} rounded-2xl p-6 border border-[#e2e8f0] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1`}
+              className={`${item.bg} rounded-2xl p-6 border border-[#e2e8f0] shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-1`}
             >
               <div className={`w-12 h-12 ${item.iconBg} rounded-xl flex items-center justify-center text-white mb-5 shadow-md`}>
                 {item.icon}

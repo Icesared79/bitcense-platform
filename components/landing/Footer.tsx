@@ -1,7 +1,17 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 
 export function Footer() {
+  const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const element = document.getElementById('get-started')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <footer className="bg-[#0f172a] text-white relative">
       {/* Top accent line */}
@@ -18,6 +28,7 @@ export function Footer() {
           </p>
           <a
             href="#get-started"
+            onClick={scrollToForm}
             className="inline-flex items-center bg-[#15803d] text-white px-10 py-5 rounded-xl text-lg font-semibold hover:bg-[#166534] transition-all duration-200 shadow-lg shadow-[#15803d]/25 hover:shadow-xl hover:shadow-[#15803d]/30 hover:-translate-y-0.5 active:translate-y-0"
           >
             Get Started

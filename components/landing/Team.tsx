@@ -6,6 +6,7 @@ export function Team() {
       initials: 'PD',
       bg: 'bg-[#15803d]',
       shadowColor: '#15803d',
+      border: false,
     },
     {
       name: 'Joe Joyce',
@@ -13,6 +14,7 @@ export function Team() {
       initials: 'JJ',
       bg: 'bg-[#0f172a]',
       shadowColor: '#0f172a',
+      border: true,
     },
     {
       name: 'Michael Orlandi',
@@ -20,6 +22,7 @@ export function Team() {
       initials: 'MO',
       bg: 'bg-[#15803d]',
       shadowColor: '#15803d',
+      border: false,
     },
     {
       name: 'Shane Fleming',
@@ -27,6 +30,7 @@ export function Team() {
       initials: 'SF',
       bg: 'bg-[#0f172a]',
       shadowColor: '#0f172a',
+      border: true,
     },
     {
       name: 'Delia Sabau',
@@ -34,6 +38,7 @@ export function Team() {
       initials: 'DS',
       bg: 'bg-[#15803d]',
       shadowColor: '#15803d',
+      border: false,
     },
   ]
 
@@ -57,7 +62,7 @@ export function Team() {
             <div key={member.name} className="text-center group">
               <div className="relative mx-auto mb-6">
                 <div
-                  className={`w-24 h-24 lg:w-28 lg:h-28 ${member.bg} rounded-full flex items-center justify-center text-white font-bold text-2xl lg:text-3xl mx-auto group-hover:scale-105 transition-all duration-300`}
+                  className={`w-24 h-24 lg:w-28 lg:h-28 ${member.bg} rounded-full flex items-center justify-center text-white font-bold text-2xl lg:text-3xl mx-auto transition-all duration-200 group-hover:scale-105 ${member.border ? 'ring-2 ring-[#e2e8f0]' : ''}`}
                   style={{
                     boxShadow: `0 20px 40px -12px ${member.shadowColor}50`,
                   }}
