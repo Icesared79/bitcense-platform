@@ -17,8 +17,8 @@ export function HowItWorks() {
         {/* Steps */}
         <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
           {/* Step 1 */}
-          <div className="text-center">
-            <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 mx-auto mb-6">
+          <div className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-[#e2e8f0]">
+            <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-3xl font-extrabold shadow-lg shadow-[#15803d]/25 mx-auto mb-6">
               01
             </div>
             <h3 className="text-xl font-bold text-[#0f172a] mb-3">Submit</h3>
@@ -28,12 +28,12 @@ export function HowItWorks() {
           </div>
 
           {/* Step 2 */}
-          <div className="text-center relative">
+          <div className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-[#e2e8f0] relative">
             {/* Connectors - only visible on desktop */}
-            <div className="hidden md:block absolute top-10 -left-6 lg:-left-8 w-6 lg:w-8 h-0.5 bg-[#fde047]" />
-            <div className="hidden md:block absolute top-10 -right-6 lg:-right-8 w-6 lg:w-8 h-0.5 bg-[#fde047]" />
+            <div className="hidden md:block absolute top-1/2 -left-4 lg:-left-6 w-4 lg:w-6 h-0.5 bg-[#fde047] -translate-y-8" />
+            <div className="hidden md:block absolute top-1/2 -right-4 lg:-right-6 w-4 lg:w-6 h-0.5 bg-[#fde047] -translate-y-8" />
 
-            <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 mx-auto mb-6">
+            <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-3xl font-extrabold shadow-lg shadow-[#15803d]/25 mx-auto mb-6">
               02
             </div>
             <h3 className="text-xl font-bold text-[#0f172a] mb-3">Qualify</h3>
@@ -43,8 +43,8 @@ export function HowItWorks() {
           </div>
 
           {/* Step 3 */}
-          <div className="text-center">
-            <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 mx-auto mb-6">
+          <div className="text-center bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-[#e2e8f0]">
+            <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-3xl font-extrabold shadow-lg shadow-[#15803d]/25 mx-auto mb-6">
               03
             </div>
             <h3 className="text-xl font-bold text-[#0f172a] mb-3">Distribute</h3>

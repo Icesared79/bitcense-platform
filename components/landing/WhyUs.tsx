@@ -9,7 +9,7 @@ export function WhyUs() {
         </svg>
       ),
       iconBg: 'bg-[#15803d]',
-      cardBg: 'bg-white',
+      iconRing: 'ring-2 ring-[#fde047]/40',
     },
     {
       title: 'Rigorous Qualification',
@@ -20,7 +20,7 @@ export function WhyUs() {
         </svg>
       ),
       iconBg: 'bg-[#0f172a]',
-      cardBg: 'bg-[#fafafa]',
+      iconRing: '',
     },
     {
       title: 'Full Transparency',
@@ -32,7 +32,7 @@ export function WhyUs() {
         </svg>
       ),
       iconBg: 'bg-[#0f172a]',
-      cardBg: 'bg-[#fafafa]',
+      iconRing: '',
     },
     {
       title: 'You Stay in Control',
@@ -43,7 +43,7 @@ export function WhyUs() {
         </svg>
       ),
       iconBg: 'bg-[#15803d]',
-      cardBg: 'bg-white',
+      iconRing: 'ring-2 ring-[#fde047]/40',
     },
   ]
 
@@ -66,9 +66,9 @@ export function WhyUs() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className={`${feature.cardBg} rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
+              className="bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1"
             >
-              <div className={`w-14 h-14 ${feature.iconBg} rounded-xl flex items-center justify-center text-white mb-6 shadow-lg`}>
+              <div className={`w-14 h-14 ${feature.iconBg} ${feature.iconRing} rounded-xl flex items-center justify-center text-white mb-6 shadow-lg`}>
                 {feature.icon}
               </div>
               <h3 className="text-2xl font-bold text-[#0f172a] mb-4">{feature.title}</h3>

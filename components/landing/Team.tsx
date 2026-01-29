@@ -79,13 +79,13 @@ export function Team() {
               <div
                 className={`w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden transition-all duration-300 ${
                   expandedIndex === index
-                    ? 'ring-4 ring-[#fde047] scale-105'
-                    : 'hover:scale-105 hover:ring-2 hover:ring-[#fde047]/50'
+                    ? 'ring-4 ring-[#fde047] scale-110'
+                    : 'hover:scale-110 hover:ring-2 hover:ring-[#15803d]/50 hover:shadow-xl'
                 }`}
                 style={{
                   boxShadow: expandedIndex === index
                     ? '0 20px 40px -12px rgba(15, 23, 42, 0.4)'
-                    : '0 10px 30px -10px rgba(15, 23, 42, 0.3)',
+                    : '0 10px 30px -10px rgba(15, 23, 42, 0.2)',
                 }}
               >
                 <Image
@@ -98,8 +98,8 @@ export function Team() {
               </div>
               <h3 className="font-bold text-[#0f172a] text-base lg:text-lg mt-4">{member.name}</h3>
               <p className="text-sm lg:text-base text-[#64748b] mt-1">{member.role}</p>
-              <span className={`mt-2 text-sm font-medium transition-colors duration-200 ${
-                expandedIndex === index ? 'text-[#15803d]' : 'text-[#94a3b8] group-hover:text-[#15803d]'
+              <span className={`mt-2 text-sm font-semibold transition-colors duration-200 ${
+                expandedIndex === index ? 'text-[#15803d]' : 'text-[#15803d]/70 group-hover:text-[#15803d]'
               }`}>
                 {expandedIndex === index ? '− Show less' : '+ Read more'}
               </span>

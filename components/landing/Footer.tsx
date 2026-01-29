@@ -13,7 +13,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-[#0f172a] text-white relative">
+    <footer className="bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white relative">
       {/* Top accent line */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#15803d] via-[#15803d]/50 to-[#15803d]" />
 

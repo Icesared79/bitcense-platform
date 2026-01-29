@@ -83,14 +83,14 @@ export function Hero() {
                   </svg>
                 </div>
 
-                {/* BitCense */}
+                {/* BitCense - larger center hub */}
                 <div className="flex-1 text-center">
-                  <div className="w-16 h-16 lg:w-20 lg:h-20 bg-[#15803d] rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-[#15803d]/25">
-                    <svg className="w-8 h-8 lg:w-10 lg:h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#15803d] rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-xl shadow-[#15803d]/30 ring-2 ring-[#fde047]/30">
+                    <svg className="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                     </svg>
                   </div>
-                  <div className="font-semibold text-[#0f172a] text-sm lg:text-base">BitCense</div>
+                  <div className="font-bold text-[#0f172a] text-sm lg:text-base">BitCense</div>
                   <div className="text-xs lg:text-sm text-[#64748b] mt-0.5">Qualify</div>
                 </div>
 
