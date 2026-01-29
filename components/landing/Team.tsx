@@ -10,7 +10,7 @@ export function Team() {
       name: 'Paul DiCesare',
       role: 'Founder & CEO',
       initials: 'PD',
-      bio: "Paul founded BitCense after 25+ years in real estate, proptech, and property tokenization. He built BitCense to help clients convert illiquid assets into digital tokens through compliant infrastructure. A U.S. Air Force combat veteran, he holds a Bachelor's from Penn State.",
+      bio: "Paul founded BitCense after 25+ years in real estate, proptech, and property tokenization. He built BitCense to connect alternative asset managers with licensed global distribution partners. A U.S. Air Force combat veteran.",
       linkedin: '#',
       email: '#',
     },
