@@ -1,6 +1,13 @@
+'use client'
+
+import { useFadeIn } from '@/hooks/useFadeIn'
+
 export function HowItWorks() {
+  const { ref, isVisible } = useFadeIn(0.1)
+
   return (
     <section id="how-it-works" className="py-40 lg:py-48 px-4 sm:px-6 lg:px-8 bg-white relative">
+      <div ref={ref} className={`fade-in-section ${isVisible ? 'visible' : ''}`}>
       {/* Top border accent */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e2e8f0] to-transparent" />
 
@@ -115,6 +122,7 @@ export function HowItWorks() {
             </p>
           </div>
         </div>
+      </div>
       </div>
     </section>
   )

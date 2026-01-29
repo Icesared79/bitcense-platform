@@ -2,9 +2,11 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { useFadeIn } from '@/hooks/useFadeIn'
 
 export function Team() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
+  const { ref, isVisible } = useFadeIn(0.1)
 
   const team = [
     {
@@ -58,7 +60,7 @@ export function Team() {
       {/* Top border accent */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e2e8f0] to-transparent" />
 
-      <div className="max-w-7xl mx-auto">
+      <div ref={ref} className={`max-w-7xl mx-auto fade-in-section ${isVisible ? 'visible' : ''}`}>
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#0f172a] leading-tight tracking-tight">
             Leadership

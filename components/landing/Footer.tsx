@@ -2,8 +2,10 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { useFadeIn } from '@/hooks/useFadeIn'
 
 export function Footer() {
+  const { ref, isVisible } = useFadeIn(0.1)
   const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const element = document.getElementById('get-started')
@@ -19,7 +21,7 @@ export function Footer() {
 
       {/* CTA Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
-        <div className="text-center max-w-3xl mx-auto">
+        <div ref={ref} className={`text-center max-w-3xl mx-auto fade-in-section ${isVisible ? 'visible' : ''}`}>
           <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight mb-6">
             Ready to Reach Global Investors?
           </h2>
