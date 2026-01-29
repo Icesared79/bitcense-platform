@@ -9,6 +9,7 @@ export function WhyUs() {
         </svg>
       ),
       iconBg: 'bg-[#15803d]',
+      cardBg: 'bg-white',
     },
     {
       title: 'Rigorous Qualification',
@@ -19,6 +20,7 @@ export function WhyUs() {
         </svg>
       ),
       iconBg: 'bg-[#0f172a]',
+      cardBg: 'bg-[#fafafa]',
     },
     {
       title: 'Full Transparency',
@@ -30,6 +32,7 @@ export function WhyUs() {
         </svg>
       ),
       iconBg: 'bg-[#0f172a]',
+      cardBg: 'bg-[#fafafa]',
     },
     {
       title: 'You Stay in Control',
@@ -40,12 +43,19 @@ export function WhyUs() {
         </svg>
       ),
       iconBg: 'bg-[#15803d]',
+      cardBg: 'bg-white',
     },
   ]
 
   return (
-    <section id="features" className="py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-[#f8fafc]">
-      <div className="max-w-7xl mx-auto">
+    <section id="features" className="py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-[#f8fafc] relative">
+      {/* Top border accent */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e2e8f0] to-transparent" />
+
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a02_1px,transparent_1px),linear-gradient(to_bottom,#0f172a02_1px,transparent_1px)] bg-[size:48px_48px]" />
+
+      <div className="max-w-7xl mx-auto relative">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#0f172a] leading-tight tracking-tight">
             Built for Asset Managers Who Demand More
@@ -59,7 +69,7 @@ export function WhyUs() {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              className={`${feature.cardBg} rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
             >
               <div className={`w-14 h-14 ${feature.iconBg} rounded-xl flex items-center justify-center text-white mb-6 shadow-lg`}>
                 {feature.icon}

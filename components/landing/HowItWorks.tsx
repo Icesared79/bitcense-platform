@@ -10,6 +10,7 @@ export function HowItWorks() {
         </svg>
       ),
       iconBg: 'bg-[#15803d]',
+      shadowColor: 'shadow-[#15803d]/20',
     },
     {
       number: '02',
@@ -21,6 +22,7 @@ export function HowItWorks() {
         </svg>
       ),
       iconBg: 'bg-[#0f172a]',
+      shadowColor: 'shadow-[#0f172a]/20',
     },
     {
       number: '03',
@@ -32,6 +34,7 @@ export function HowItWorks() {
         </svg>
       ),
       iconBg: 'bg-[#15803d]',
+      shadowColor: 'shadow-[#15803d]/20',
     },
   ]
 
@@ -44,6 +47,7 @@ export function HowItWorks() {
       ),
       label: 'Licensed Global Partners',
       desc: 'Regulated platforms worldwide',
+      bg: 'bg-[#15803d]/5',
       iconBg: 'bg-[#15803d]',
     },
     {
@@ -54,6 +58,7 @@ export function HowItWorks() {
       ),
       label: 'Rigorous Qualification',
       desc: 'AI + human oversight',
+      bg: 'bg-[#0f172a]/5',
       iconBg: 'bg-[#0f172a]',
     },
     {
@@ -65,6 +70,7 @@ export function HowItWorks() {
       ),
       label: 'Full Transparency',
       desc: 'Track every stage',
+      bg: 'bg-[#15803d]/5',
       iconBg: 'bg-[#15803d]',
     },
     {
@@ -75,12 +81,16 @@ export function HowItWorks() {
       ),
       label: 'You Stay in Control',
       desc: 'Your asset, your terms',
+      bg: 'bg-[#0f172a]/5',
       iconBg: 'bg-[#0f172a]',
     },
   ]
 
   return (
-    <section id="how-it-works" className="py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="how-it-works" className="py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-white relative">
+      {/* Top border accent */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e2e8f0] to-transparent" />
+
       <div className="max-w-7xl mx-auto">
         <div className="max-w-3xl mb-20">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#0f172a] leading-tight tracking-tight">
@@ -94,17 +104,17 @@ export function HowItWorks() {
         {/* Steps */}
         <div className="relative">
           {/* Connection line */}
-          <div className="hidden lg:block absolute top-24 left-[16%] right-[16%] h-0.5 bg-gradient-to-r from-[#15803d]/40 via-[#0f172a]/20 to-[#15803d]/40" />
+          <div className="hidden lg:block absolute top-[60px] left-[20%] right-[20%] h-1 bg-gradient-to-r from-[#15803d]/30 via-[#0f172a]/20 to-[#15803d]/30 rounded-full" />
 
           <div className="grid lg:grid-cols-3 gap-8">
             {steps.map((step) => (
-              <div key={step.number} className="relative">
-                <div className="bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <div key={step.number} className="relative group">
+                <div className={`bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg ${step.shadowColor} hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}>
                   <div className="flex items-start justify-between mb-8">
                     <div className={`w-14 h-14 ${step.iconBg} rounded-xl flex items-center justify-center text-white shadow-lg`}>
                       {step.icon}
                     </div>
-                    <span className="text-6xl lg:text-7xl font-extrabold text-[#15803d]/20">{step.number}</span>
+                    <span className="text-6xl lg:text-7xl font-extrabold text-[#15803d]">{step.number}</span>
                   </div>
                   <h3 className="text-2xl font-bold text-[#0f172a] mb-3">{step.title}</h3>
                   <p className="text-lg text-[#334155] leading-relaxed">{step.description}</p>
@@ -119,9 +129,9 @@ export function HowItWorks() {
           {valueProps.map((item) => (
             <div
               key={item.label}
-              className="bg-[#f8fafc] rounded-2xl p-6 border border-[#e2e8f0] shadow-md hover:shadow-lg transition-all duration-300"
+              className={`${item.bg} rounded-2xl p-6 border border-[#e2e8f0] shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1`}
             >
-              <div className={`w-14 h-14 ${item.iconBg} rounded-xl flex items-center justify-center text-white mb-5 shadow-md`}>
+              <div className={`w-12 h-12 ${item.iconBg} rounded-xl flex items-center justify-center text-white mb-5 shadow-md`}>
                 {item.icon}
               </div>
               <div className="font-bold text-[#0f172a] text-lg mb-1">{item.label}</div>

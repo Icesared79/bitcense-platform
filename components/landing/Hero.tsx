@@ -41,14 +41,17 @@ export function Hero() {
 
   return (
     <section id="get-started" className="relative pt-32 pb-24 lg:pt-40 lg:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10 bg-[#fafafa]">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-[#15803d]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#0f172a]/5 rounded-full blur-3xl" />
+      {/* Background gradient */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-white via-[#f8fafc] to-[#f1f5f9]">
+        {/* Decorative shapes */}
+        <div className="absolute top-20 left-0 w-[800px] h-[800px] bg-[#15803d]/[0.03] rounded-full blur-3xl -translate-x-1/2" />
+        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#0f172a]/[0.03] rounded-full blur-3xl translate-x-1/3" />
+        {/* Subtle grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a03_1px,transparent_1px),linear-gradient(to_bottom,#0f172a03_1px,transparent_1px)] bg-[size:64px_64px]" />
       </div>
 
       <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
           {/* Left Side - Content & Visual */}
           <div className="order-2 lg:order-1">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-[#0f172a] leading-[1.05] tracking-tight">
@@ -62,64 +65,65 @@ export function Hero() {
               BitCense connects alternative asset managers to licensed global distribution partners.
             </p>
 
-            {/* Flow Diagram */}
-            <div className="mt-12 p-8 bg-white rounded-2xl border border-[#e2e8f0] shadow-xl">
-              <div className="flex items-center justify-between">
-                {/* Asset Managers */}
-                <div className="flex-1 text-center">
-                  <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                    <svg className="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                  </div>
-                  <div className="font-semibold text-[#0f172a] text-base">Asset Managers</div>
-                  <div className="text-sm text-[#64748b] mt-1">Submit assets</div>
-                </div>
+            {/* Flow Diagram - Made More Prominent */}
+            <div className="mt-12 relative">
+              {/* Background accent */}
+              <div className="absolute -inset-4 bg-gradient-to-br from-[#15803d]/5 to-[#0f172a]/5 rounded-3xl" />
 
-                {/* Arrow */}
-                <div className="flex-shrink-0 px-2 lg:px-4">
-                  <div className="flex items-center">
-                    <div className="w-8 lg:w-12 h-0.5 bg-[#0f172a]/20" />
-                    <svg className="w-5 h-5 text-[#15803d] -ml-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
+              <div className="relative bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-xl">
+                <div className="flex items-center justify-between gap-4">
+                  {/* Asset Managers */}
+                  <div className="flex-1 text-center">
+                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-[#0f172a]/20">
+                      <svg className="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                    </div>
+                    <div className="font-bold text-[#0f172a] text-base lg:text-lg">Asset Managers</div>
+                    <div className="text-sm text-[#64748b] mt-1">Submit assets</div>
                   </div>
-                </div>
 
-                {/* BitCense */}
-                <div className="flex-1 text-center">
-                  <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#15803d] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#15803d]/30 p-4 lg:p-5">
-                    <Image
-                      src="/logo-icon.png"
-                      alt="BitCense"
-                      width={56}
-                      height={56}
-                      className="invert brightness-200"
-                    />
+                  {/* Arrow */}
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center">
+                      <div className="w-8 lg:w-16 h-1 bg-gradient-to-r from-[#0f172a]/30 to-[#15803d]/60 rounded-full" />
+                      <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-[#15803d] -ml-1" />
+                    </div>
                   </div>
-                  <div className="font-semibold text-[#0f172a] text-base">BitCense</div>
-                  <div className="text-sm text-[#64748b] mt-1">Qualify & Package</div>
-                </div>
 
-                {/* Arrow */}
-                <div className="flex-shrink-0 px-2 lg:px-4">
-                  <div className="flex items-center">
-                    <div className="w-8 lg:w-12 h-0.5 bg-[#0f172a]/20" />
-                    <svg className="w-5 h-5 text-[#15803d] -ml-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
+                  {/* BitCense */}
+                  <div className="flex-1 text-center">
+                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#15803d] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-[#15803d]/30 p-4 lg:p-5">
+                      <Image
+                        src="/logo-icon.png"
+                        alt="BitCense"
+                        width={56}
+                        height={56}
+                        className="invert brightness-200"
+                      />
+                    </div>
+                    <div className="font-bold text-[#0f172a] text-base lg:text-lg">BitCense</div>
+                    <div className="text-sm text-[#64748b] mt-1">Qualify & Package</div>
                   </div>
-                </div>
 
-                {/* Global Investors */}
-                <div className="flex-1 text-center">
-                  <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
-                    <svg className="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                  {/* Arrow */}
+                  <div className="flex-shrink-0">
+                    <div className="flex items-center">
+                      <div className="w-8 lg:w-16 h-1 bg-gradient-to-r from-[#15803d]/60 to-[#0f172a]/30 rounded-full" />
+                      <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-[#0f172a]/40 -ml-1" />
+                    </div>
                   </div>
-                  <div className="font-semibold text-[#0f172a] text-base">Global Investors</div>
-                  <div className="text-sm text-[#64748b] mt-1">Licensed distribution</div>
+
+                  {/* Global Investors */}
+                  <div className="flex-1 text-center">
+                    <div className="w-20 h-20 lg:w-24 lg:h-24 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-[#0f172a]/20">
+                      <svg className="w-10 h-10 lg:w-12 lg:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div className="font-bold text-[#0f172a] text-base lg:text-lg">Global Investors</div>
+                    <div className="text-sm text-[#64748b] mt-1">Licensed distribution</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -127,15 +131,18 @@ export function Hero() {
 
           {/* Right Side - Lead Capture Form */}
           <div className="order-1 lg:order-2">
-            <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl shadow-[#0f172a]/10 border border-[#e2e8f0]">
-              <div className="text-center mb-8">
+            <div className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl shadow-[#0f172a]/10 border border-[#e2e8f0] relative">
+              {/* Decorative accent */}
+              <div className="absolute top-0 left-8 right-8 h-1 bg-gradient-to-r from-[#15803d] to-[#0f172a] rounded-b-full" />
+
+              <div className="text-center mb-8 pt-2">
                 <h2 className="text-3xl font-bold text-[#0f172a]">Get Started</h2>
                 <p className="text-[#64748b] mt-2 text-lg">Tell us about your asset</p>
               </div>
 
               {isSuccess ? (
                 <div className="text-center py-12">
-                  <div className="w-16 h-16 bg-[#15803d]/10 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <div className="w-16 h-16 bg-[#15803d]/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <svg className="w-8 h-8 text-[#15803d]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
@@ -227,7 +234,7 @@ export function Hero() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-[#15803d] text-white py-4 rounded-xl text-lg font-semibold hover:bg-[#166534] transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg shadow-[#15803d]/25 hover:shadow-xl hover:shadow-[#15803d]/30 hover:-translate-y-0.5 active:translate-y-0"
+                    className="w-full bg-[#15803d] text-white py-4 rounded-xl text-lg font-semibold hover:bg-[#166534] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center shadow-lg shadow-[#15803d]/25 hover:shadow-xl hover:shadow-[#15803d]/30 hover:-translate-y-0.5 active:translate-y-0"
                   >
                     {isSubmitting ? (
                       <>

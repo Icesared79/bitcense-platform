@@ -4,36 +4,44 @@ export function Team() {
       name: 'Paul DiCesare',
       role: 'Founder & CEO',
       initials: 'PD',
-      color: '#15803d',
+      bg: 'bg-[#15803d]',
+      shadowColor: '#15803d',
     },
     {
       name: 'Joe Joyce',
       role: 'Co-Founder & CPO',
       initials: 'JJ',
-      color: '#0f172a',
+      bg: 'bg-[#0f172a]',
+      shadowColor: '#0f172a',
     },
     {
       name: 'Michael Orlandi',
       role: 'Co-Founder & CIO',
       initials: 'MO',
-      color: '#15803d',
+      bg: 'bg-[#15803d]',
+      shadowColor: '#15803d',
     },
     {
       name: 'Shane Fleming',
       role: 'Chief Strategy Officer',
       initials: 'SF',
-      color: '#0f172a',
+      bg: 'bg-[#0f172a]',
+      shadowColor: '#0f172a',
     },
     {
       name: 'Delia Sabau',
       role: 'Head of Capital Structuring',
       initials: 'DS',
-      color: '#15803d',
+      bg: 'bg-[#15803d]',
+      shadowColor: '#15803d',
     },
   ]
 
   return (
-    <section id="team" className="py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="team" className="py-32 lg:py-40 px-4 sm:px-6 lg:px-8 bg-white relative">
+      {/* Top border accent */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e2e8f0] to-transparent" />
+
       <div className="max-w-7xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#0f172a] leading-tight tracking-tight">
@@ -49,10 +57,9 @@ export function Team() {
             <div key={member.name} className="text-center group">
               <div className="relative mx-auto mb-6">
                 <div
-                  className="w-24 h-24 lg:w-28 lg:h-28 rounded-full flex items-center justify-center text-white font-bold text-2xl lg:text-3xl mx-auto shadow-xl group-hover:scale-105 transition-all duration-300"
+                  className={`w-24 h-24 lg:w-28 lg:h-28 ${member.bg} rounded-full flex items-center justify-center text-white font-bold text-2xl lg:text-3xl mx-auto group-hover:scale-105 transition-all duration-300`}
                   style={{
-                    backgroundColor: member.color,
-                    boxShadow: `0 20px 40px -12px ${member.color}50`,
+                    boxShadow: `0 20px 40px -12px ${member.shadowColor}50`,
                   }}
                 >
                   {member.initials}

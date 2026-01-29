@@ -3,7 +3,10 @@ import Image from 'next/image'
 
 export function Footer() {
   return (
-    <footer className="bg-[#0f172a] text-white">
+    <footer className="bg-[#0f172a] text-white relative">
+      {/* Top accent line */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#15803d] via-[#15803d]/50 to-[#15803d]" />
+
       {/* CTA Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <div className="text-center max-w-3xl mx-auto">
@@ -15,7 +18,7 @@ export function Footer() {
           </p>
           <a
             href="#get-started"
-            className="inline-flex items-center bg-[#15803d] text-white px-10 py-5 rounded-xl text-lg font-semibold hover:bg-[#166534] transition-all shadow-lg shadow-[#15803d]/25 hover:shadow-xl hover:shadow-[#15803d]/30 hover:-translate-y-0.5 active:translate-y-0"
+            className="inline-flex items-center bg-[#15803d] text-white px-10 py-5 rounded-xl text-lg font-semibold hover:bg-[#166534] transition-all duration-200 shadow-lg shadow-[#15803d]/25 hover:shadow-xl hover:shadow-[#15803d]/30 hover:-translate-y-0.5 active:translate-y-0"
           >
             Get Started
             <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -36,7 +39,7 @@ export function Footer() {
                   alt="BitCense"
                   width={32}
                   height={32}
-                  className="invert brightness-200 group-hover:scale-105 transition-transform"
+                  className="invert brightness-200 group-hover:scale-105 transition-transform duration-200"
                 />
                 <span className="text-xl font-bold">BitCense</span>
               </Link>
