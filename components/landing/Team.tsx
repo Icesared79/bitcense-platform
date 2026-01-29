@@ -42,7 +42,7 @@ export function Team() {
       name: 'Delia Sabau',
       role: 'Head of Capital Structuring',
       initials: 'DS',
-      bio: "Delia is an investment leader with 20+ years in institutional finance. She managed $1B+ in equity strategies at Barclays Global Investors (now BlackRock) and serves as the architect of BitCense's vaulting strategy.",
+      bio: "Delia is an investment leader with 20+ years in institutional finance. She managed $1B+ in equity strategies at Barclays Global Investors (now BlackRock) and leads BitCense's capital structuring initiatives.",
       linkedin: '#',
       email: '#',
     },
