@@ -22,7 +22,7 @@ export function HowItWorks() {
       {/* Top border accent */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e2e8f0] to-transparent" />
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#0f172a] leading-tight tracking-tight">
             Three Simple Steps
@@ -32,58 +32,79 @@ export function HowItWorks() {
           </p>
         </div>
 
-        {/* Steps - Connected Flow */}
-        <div className="relative">
-          {/* Desktop: Horizontal layout */}
-          <div className="hidden lg:flex items-start justify-between">
-            {steps.map((step, index) => (
-              <div key={step.number} className="flex items-start flex-1">
-                {/* Step content */}
-                <div className="flex flex-col items-center text-center flex-1">
-                  {/* Number circle */}
-                  <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 relative z-10">
-                    {step.number}
-                  </div>
+        {/* Desktop: Horizontal layout */}
+        <div className="hidden lg:block">
+          {/* Steps row with circles and arrows */}
+          <div className="flex items-center justify-center mb-10">
+            {/* Step 1 circle */}
+            <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 flex-shrink-0">
+              01
+            </div>
 
-                  {/* Title and description */}
-                  <h3 className="text-2xl font-bold text-[#0f172a] mt-6 mb-3">{step.title}</h3>
-                  <p className="text-base text-[#64748b] leading-relaxed max-w-[200px]">{step.description}</p>
-                </div>
+            {/* Arrow 1 */}
+            <div className="flex items-center mx-6">
+              <div className="w-20 h-0.5 bg-[#fde047]" />
+              <svg className="w-4 h-4 text-[#fde047] -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </div>
 
-                {/* Connector arrow (not on last item) */}
-                {index < steps.length - 1 && (
-                  <div className="flex items-center mt-10 -mx-4">
-                    <div className="w-16 h-0.5 bg-[#fde047]" />
-                    <svg className="w-5 h-5 text-[#fde047] -ml-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                )}
-              </div>
-            ))}
+            {/* Step 2 circle */}
+            <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 flex-shrink-0">
+              02
+            </div>
+
+            {/* Arrow 2 */}
+            <div className="flex items-center mx-6">
+              <div className="w-20 h-0.5 bg-[#fde047]" />
+              <svg className="w-4 h-4 text-[#fde047] -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+              </svg>
+            </div>
+
+            {/* Step 3 circle */}
+            <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 flex-shrink-0">
+              03
+            </div>
           </div>
 
-          {/* Mobile: Vertical layout with connecting line */}
-          <div className="lg:hidden relative">
-            {/* Vertical connecting line */}
-            <div className="absolute left-10 top-10 bottom-10 w-0.5 bg-[#fde047]" />
-
-            <div className="space-y-12">
-              {steps.map((step, index) => (
-                <div key={step.number} className="flex items-start gap-6">
-                  {/* Number circle */}
-                  <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 relative z-10 flex-shrink-0">
-                    {step.number}
-                  </div>
-
-                  {/* Content */}
-                  <div className="pt-4">
-                    <h3 className="text-xl font-bold text-[#0f172a] mb-2">{step.title}</h3>
-                    <p className="text-base text-[#64748b] leading-relaxed">{step.description}</p>
-                  </div>
-                </div>
-              ))}
+          {/* Labels row */}
+          <div className="flex justify-center">
+            <div className="w-20 text-center mx-[62px] first:ml-0 last:mr-0">
+              <h3 className="text-xl font-bold text-[#0f172a] mb-2">{steps[0].title}</h3>
+              <p className="text-sm text-[#64748b] leading-relaxed">{steps[0].description}</p>
             </div>
+            <div className="w-20 text-center mx-[62px]">
+              <h3 className="text-xl font-bold text-[#0f172a] mb-2">{steps[1].title}</h3>
+              <p className="text-sm text-[#64748b] leading-relaxed">{steps[1].description}</p>
+            </div>
+            <div className="w-20 text-center mx-[62px] first:ml-0 last:mr-0">
+              <h3 className="text-xl font-bold text-[#0f172a] mb-2">{steps[2].title}</h3>
+              <p className="text-sm text-[#64748b] leading-relaxed">{steps[2].description}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile: Vertical layout */}
+        <div className="lg:hidden relative">
+          {/* Vertical connecting line */}
+          <div className="absolute left-10 top-10 bottom-10 w-0.5 bg-[#fde047]" />
+
+          <div className="space-y-12">
+            {steps.map((step) => (
+              <div key={step.number} className="flex items-start gap-6">
+                {/* Number circle */}
+                <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 relative z-10 flex-shrink-0">
+                  {step.number}
+                </div>
+
+                {/* Content */}
+                <div className="pt-4">
+                  <h3 className="text-xl font-bold text-[#0f172a] mb-2">{step.title}</h3>
+                  <p className="text-base text-[#64748b] leading-relaxed">{step.description}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
