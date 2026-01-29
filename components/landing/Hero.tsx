@@ -40,65 +40,56 @@ export function Hero() {
   }
 
   return (
-    <section id="get-started" className="relative min-h-[90vh] flex items-center pt-20 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden bg-gradient-to-br from-gray-50 via-white to-[#4A7C59]/5">
-      {/* Background Elements */}
-      <div className="absolute inset-0 -z-10">
+    <section id="get-started" className="relative min-h-screen flex items-center pt-24 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Background with gradient */}
+      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-white via-gray-50 to-[#4A7C59]/5">
         {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:64px_64px]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#0f172a05_1px,transparent_1px),linear-gradient(to_bottom,#0f172a05_1px,transparent_1px)] bg-[size:64px_64px]" />
 
         {/* Gradient orbs */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-[#4A7C59]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#4A7C59]/5 rounded-full blur-3xl" />
-        <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl" />
-
-        {/* Abstract shapes */}
-        <div className="absolute top-32 right-1/4 w-4 h-4 bg-[#4A7C59]/20 rounded-full" />
-        <div className="absolute top-48 left-1/4 w-2 h-2 bg-[#4A7C59]/30 rounded-full" />
-        <div className="absolute bottom-32 left-1/3 w-3 h-3 bg-[#4A7C59]/20 rounded-full" />
+        <div className="absolute top-20 left-10 w-96 h-96 bg-[#4A7C59]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-[#0f172a]/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-[#4A7C59]/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
           {/* Left Side - Content & Visual */}
           <div className="order-2 lg:order-1">
-            <div className="inline-flex items-center px-4 py-2 bg-[#4A7C59]/10 rounded-full mb-6">
-              <span className="w-2 h-2 bg-[#4A7C59] rounded-full mr-2 animate-pulse" />
-              <span className="text-[#4A7C59] font-medium text-sm">Global Asset Distribution Platform</span>
-            </div>
+            <p className="text-[#4A7C59] font-semibold text-sm mb-6">
+              Global Asset Distribution Platform
+            </p>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-[1.1] tracking-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#0f172a] leading-[1.1] tracking-tight">
               Your Yield.{' '}
-              <span className="text-[#4A7C59] relative">
+              <span className="text-[#4A7C59]">
                 Our Global Distribution.
-                <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
-                  <path d="M2 10C50 4 150 2 298 8" stroke="#4A7C59" strokeWidth="3" strokeLinecap="round" strokeOpacity="0.3"/>
-                </svg>
               </span>
             </h1>
 
-            <p className="mt-6 text-xl text-gray-600 leading-relaxed max-w-xl">
+            <p className="mt-8 text-xl text-gray-600 leading-relaxed max-w-xl">
               BitCense connects alternative asset managers to licensed global distribution partners.
             </p>
 
             {/* Flow Diagram */}
-            <div className="mt-10 p-6 bg-white rounded-2xl border border-gray-100 shadow-lg shadow-gray-100/50">
+            <div className="mt-12 p-8 bg-white rounded-2xl border border-gray-200 shadow-xl shadow-gray-200/50">
               <div className="flex items-center justify-between">
                 {/* Asset Managers */}
                 <div className="flex-1 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-gray-200 shadow-sm">
-                    <svg className="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-20 h-20 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                   </div>
-                  <div className="font-semibold text-gray-900 text-sm">Asset Managers</div>
-                  <div className="text-xs text-gray-500">Submit assets</div>
+                  <div className="font-semibold text-[#0f172a]">Asset Managers</div>
+                  <div className="text-sm text-gray-500 mt-1">Submit assets</div>
                 </div>
 
                 {/* Arrow */}
-                <div className="flex-shrink-0 px-3">
+                <div className="flex-shrink-0 px-4">
                   <div className="flex items-center">
-                    <div className="w-8 h-0.5 bg-gradient-to-r from-gray-300 to-[#4A7C59]/50" />
-                    <svg className="w-4 h-4 text-[#4A7C59]/50 -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="w-12 h-0.5 bg-gradient-to-r from-[#0f172a]/30 to-[#4A7C59]/50" />
+                    <svg className="w-5 h-5 text-[#4A7C59] -ml-1" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -106,24 +97,24 @@ export function Hero() {
 
                 {/* BitCense */}
                 <div className="flex-1 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-[#4A7C59] to-[#3A6C49] rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-[#4A7C59]/25 p-3">
+                  <div className="w-20 h-20 bg-gradient-to-br from-[#4A7C59] to-[#3A6C49] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#4A7C59]/30 p-4">
                     <Image
                       src="/logo-icon.png"
                       alt="BitCense"
-                      width={40}
-                      height={40}
+                      width={48}
+                      height={48}
                       className="invert brightness-200"
                     />
                   </div>
-                  <div className="font-semibold text-gray-900 text-sm">BitCense</div>
-                  <div className="text-xs text-gray-500">Qualify & Package</div>
+                  <div className="font-semibold text-[#0f172a]">BitCense</div>
+                  <div className="text-sm text-gray-500 mt-1">Qualify & Package</div>
                 </div>
 
                 {/* Arrow */}
-                <div className="flex-shrink-0 px-3">
+                <div className="flex-shrink-0 px-4">
                   <div className="flex items-center">
-                    <div className="w-8 h-0.5 bg-gradient-to-r from-[#4A7C59]/50 to-gray-300" />
-                    <svg className="w-4 h-4 text-gray-400 -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="w-12 h-0.5 bg-gradient-to-r from-[#4A7C59]/50 to-[#0f172a]/30" />
+                    <svg className="w-5 h-5 text-[#0f172a]/50 -ml-1" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
                   </div>
@@ -131,13 +122,13 @@ export function Hero() {
 
                 {/* Global Investors */}
                 <div className="flex-1 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-gray-100 to-gray-50 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-gray-200 shadow-sm">
-                    <svg className="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-20 h-20 bg-[#0f172a] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
+                    <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                   </div>
-                  <div className="font-semibold text-gray-900 text-sm">Global Investors</div>
-                  <div className="text-xs text-gray-500">Licensed distribution</div>
+                  <div className="font-semibold text-[#0f172a]">Global Investors</div>
+                  <div className="text-sm text-gray-500 mt-1">Licensed distribution</div>
                 </div>
               </div>
             </div>
@@ -145,15 +136,15 @@ export function Hero() {
 
           {/* Right Side - Lead Capture Form */}
           <div className="order-1 lg:order-2">
-            <div className="bg-white rounded-3xl p-8 shadow-2xl shadow-gray-200/50 border border-gray-100 relative">
+            <div className="bg-white rounded-3xl p-8 shadow-2xl shadow-gray-300/50 border border-gray-200 relative">
               {/* Form decoration */}
-              <div className="absolute -top-3 -right-3 w-24 h-24 bg-[#4A7C59]/10 rounded-full blur-2xl" />
-              <div className="absolute -bottom-3 -left-3 w-32 h-32 bg-[#4A7C59]/5 rounded-full blur-2xl" />
+              <div className="absolute -top-4 -right-4 w-32 h-32 bg-[#4A7C59]/10 rounded-full blur-2xl" />
+              <div className="absolute -bottom-4 -left-4 w-40 h-40 bg-[#0f172a]/5 rounded-full blur-2xl" />
 
               <div className="relative">
-                <div className="text-center mb-6">
-                  <h2 className="text-2xl font-bold text-gray-900">Get Started</h2>
-                  <p className="text-gray-500 mt-1">Tell us about your asset</p>
+                <div className="text-center mb-8">
+                  <h2 className="text-2xl font-bold text-[#0f172a]">Get Started</h2>
+                  <p className="text-gray-500 mt-2">Tell us about your asset</p>
                 </div>
 
                 {isSuccess ? (
@@ -163,13 +154,13 @@ export function Hero() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-2">Thank You!</h3>
+                    <h3 className="text-xl font-bold text-[#0f172a] mb-2">Thank You!</h3>
                     <p className="text-gray-500">
                       We&apos;ve received your information and will be in touch within 24 hours.
                     </p>
                   </div>
                 ) : (
-                  <form action={handleSubmit} className="space-y-4">
+                  <form action={handleSubmit} className="space-y-5">
                     {error && (
                       <div className="p-4 bg-red-50 border border-red-100 rounded-xl text-red-600 text-sm">
                         {error}
@@ -177,12 +168,12 @@ export function Hero() {
                     )}
 
                     <div>
-                      <label htmlFor="asset_type" className="block text-sm font-medium text-gray-700 mb-2">Asset Type</label>
+                      <label htmlFor="asset_type" className="block text-sm font-medium text-[#0f172a] mb-2">Asset Type</label>
                       <select
                         id="asset_type"
                         name="asset_type"
                         required
-                        className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all appearance-none cursor-pointer hover:border-gray-300"
+                        className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all appearance-none cursor-pointer hover:border-gray-300"
                         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.25rem' }}
                       >
                         <option value="">Select asset type</option>
@@ -194,37 +185,37 @@ export function Hero() {
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                        <label htmlFor="name" className="block text-sm font-medium text-[#0f172a] mb-2">Name</label>
                         <input
                           type="text"
                           id="name"
                           name="name"
                           required
                           placeholder="John Smith"
-                          className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all hover:border-gray-300"
+                          className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all hover:border-gray-300"
                         />
                       </div>
                       <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-[#0f172a] mb-2">Email</label>
                         <input
                           type="email"
                           id="email"
                           name="email"
                           required
                           placeholder="john@company.com"
-                          className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all hover:border-gray-300"
+                          className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all hover:border-gray-300"
                         />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">Location</label>
+                        <label htmlFor="location" className="block text-sm font-medium text-[#0f172a] mb-2">Location</label>
                         <select
                           id="location"
                           name="location"
                           required
-                          className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all appearance-none cursor-pointer hover:border-gray-300"
+                          className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all appearance-none cursor-pointer hover:border-gray-300"
                           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.25rem' }}
                         >
                           <option value="">Select location</option>
@@ -234,7 +225,7 @@ export function Hero() {
                         </select>
                       </div>
                       <div>
-                        <label htmlFor="linkedin" className="block text-sm font-medium text-gray-700 mb-2">
+                        <label htmlFor="linkedin" className="block text-sm font-medium text-[#0f172a] mb-2">
                           LinkedIn <span className="text-gray-400 font-normal">(optional)</span>
                         </label>
                         <input
@@ -242,7 +233,7 @@ export function Hero() {
                           id="linkedin"
                           name="linkedin"
                           placeholder="linkedin.com/in/..."
-                          className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all hover:border-gray-300"
+                          className="w-full px-4 py-3.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 placeholder-gray-400 focus:outline-none focus:border-[#4A7C59] focus:ring-2 focus:ring-[#4A7C59]/20 transition-all hover:border-gray-300"
                         />
                       </div>
                     </div>
