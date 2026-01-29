@@ -4,12 +4,18 @@ import { useState } from 'react'
 import { submitLead } from '@/app/actions/leads'
 
 const assetTypes = [
-  { value: 'real_estate', label: 'Real Estate' },
-  { value: 'equipment', label: 'Equipment' },
-  { value: 'inventory', label: 'Inventory' },
-  { value: 'accounts_receivable', label: 'Accounts Receivable' },
-  { value: 'intellectual_property', label: 'Intellectual Property' },
+  { value: 'private_credit_fund', label: 'Private Credit Fund' },
+  { value: 'clo_structured_credit', label: 'CLO / Structured Credit' },
+  { value: 'asset_backed_securities', label: 'Asset-Backed Securities' },
+  { value: 'real_estate_debt', label: 'Real Estate Debt' },
+  { value: 'tokenized_real_estate', label: 'Tokenized Real Estate' },
+  { value: 'trade_finance', label: 'Trade Finance' },
   { value: 'other', label: 'Other' },
+]
+
+const locations = [
+  { value: 'us', label: 'US' },
+  { value: 'non_us', label: 'Non-US' },
 ]
 
 export function LeadForm() {
@@ -56,54 +62,6 @@ export function LeadForm() {
         </div>
       )}
 
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Full Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            required
-            placeholder="John Smith"
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#4A7C59] focus:ring-1 focus:ring-[#4A7C59] transition-colors"
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-            placeholder="john@company.com"
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#4A7C59] focus:ring-1 focus:ring-[#4A7C59] transition-colors"
-          />
-        </div>
-      </div>
-
-      <div className="grid sm:grid-cols-2 gap-4">
-        <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-300 mb-2">Company</label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            placeholder="Acme Inc."
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#4A7C59] focus:ring-1 focus:ring-[#4A7C59] transition-colors"
-          />
-        </div>
-        <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-300 mb-2">Phone</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            placeholder="(555) 123-4567"
-            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#4A7C59] focus:ring-1 focus:ring-[#4A7C59] transition-colors"
-          />
-        </div>
-      </div>
-
       <div>
         <label htmlFor="asset_type" className="block text-sm font-medium text-gray-300 mb-2">Asset Type</label>
         <select
@@ -122,36 +80,55 @@ export function LeadForm() {
 
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
-          <label htmlFor="asset_value" className="block text-sm font-medium text-gray-300 mb-2">Estimated Value</label>
+          <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">Name</label>
           <input
             type="text"
-            id="asset_value"
-            name="asset_value"
-            placeholder="$1,000,000"
+            id="name"
+            name="name"
+            required
+            placeholder="John Smith"
             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#4A7C59] focus:ring-1 focus:ring-[#4A7C59] transition-colors"
           />
         </div>
         <div>
-          <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2">Location</label>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">Email</label>
           <input
-            type="text"
-            id="location"
-            name="location"
-            placeholder="New York, NY"
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="john@company.com"
             className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#4A7C59] focus:ring-1 focus:ring-[#4A7C59] transition-colors"
           />
         </div>
       </div>
 
-      <div>
-        <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">Additional Information</label>
-        <textarea
-          id="message"
-          name="message"
-          rows={3}
-          placeholder="Tell us more about your asset..."
-          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#4A7C59] focus:ring-1 focus:ring-[#4A7C59] transition-colors resize-none"
-        />
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div>
+          <label htmlFor="location" className="block text-sm font-medium text-gray-300 mb-2">Location</label>
+          <select
+            id="location"
+            name="location"
+            required
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white focus:outline-none focus:border-[#4A7C59] focus:ring-1 focus:ring-[#4A7C59] transition-colors appearance-none"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.5rem' }}
+          >
+            <option value="" className="bg-gray-900">Select location</option>
+            {locations.map((loc) => (
+              <option key={loc.value} value={loc.value} className="bg-gray-900">{loc.label}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label htmlFor="linkedin" className="block text-sm font-medium text-gray-300 mb-2">LinkedIn <span className="text-gray-500">(optional)</span></label>
+          <input
+            type="url"
+            id="linkedin"
+            name="linkedin"
+            placeholder="linkedin.com/in/yourprofile"
+            className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#4A7C59] focus:ring-1 focus:ring-[#4A7C59] transition-colors"
+          />
+        </div>
       </div>
 
       <button
@@ -168,7 +145,7 @@ export function LeadForm() {
             Processing...
           </>
         ) : (
-          'Submit for Qualification'
+          'Get Started'
         )}
       </button>
 
