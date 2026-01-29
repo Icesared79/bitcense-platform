@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 export function Team() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
@@ -9,7 +10,7 @@ export function Team() {
     {
       name: 'Paul DiCesare',
       role: 'Founder & CEO',
-      initials: 'PD',
+      image: '/team-paul.avif',
       bio: "Paul founded BitCense after 25+ years in real estate, proptech, and property tokenization. He built BitCense to connect alternative asset managers with licensed global distribution partners. A U.S. Air Force combat veteran.",
       linkedin: '#',
       email: '#',
@@ -17,7 +18,7 @@ export function Team() {
     {
       name: 'Joseph Joyce',
       role: 'Co-Founder & CPO',
-      initials: 'JJ',
+      image: '/team-joe.avif',
       bio: "Joe directs product vision using his expertise in commercial real estate finance and capital markets. He previously co-founded a real estate technology platform. He holds an M.S. in Financial Analysis from St. Mary's College.",
       linkedin: '#',
       email: '#',
@@ -25,7 +26,7 @@ export function Team() {
     {
       name: 'Michael Orlandi',
       role: 'Co-Founder & CIO',
-      initials: 'MO',
+      image: '/team-michael.avif',
       bio: "Michael brings 15+ years acquiring, developing, and managing institutional-quality real estate. His deep commercial real estate knowledge shapes BitCense's approach to tokenization. He holds degrees from Columbia and Harvard.",
       linkedin: '#',
       email: '#',
@@ -33,7 +34,7 @@ export function Team() {
     {
       name: 'Shane Fleming',
       role: 'Chief Strategy Officer',
-      initials: 'SF',
+      image: '/team-shane.avif',
       bio: "Shane is a real estate strategist with 20+ years across commercial, residential, and proptech sectors. He founded FlemingRE and PropGen, and leads BitCense's strategy across Ireland and US markets.",
       linkedin: '#',
       email: '#',
@@ -41,7 +42,7 @@ export function Team() {
     {
       name: 'Delia Sabau',
       role: 'Head of Capital Structuring',
-      initials: 'DS',
+      image: '/team-delia.jpg',
       bio: "Delia is an investment leader with 20+ years in institutional finance. She managed $1B+ in equity strategies at Barclays Global Investors (now BlackRock) and leads BitCense's capital structuring and distribution strategy.",
       linkedin: '#',
       email: '#',
@@ -76,20 +77,24 @@ export function Team() {
               className="flex flex-col items-center group focus:outline-none"
             >
               <div
-                className={`w-24 h-24 lg:w-28 lg:h-28 rounded-full flex items-center justify-center text-white font-bold text-2xl lg:text-3xl transition-all duration-300 ${
-                  index % 2 === 0 ? 'bg-[#15803d]' : 'bg-[#0f172a]'
-                } ${
+                className={`w-24 h-24 lg:w-28 lg:h-28 rounded-full overflow-hidden transition-all duration-300 ${
                   expandedIndex === index
                     ? 'ring-4 ring-[#fde047] scale-105'
                     : 'hover:scale-105 hover:ring-2 hover:ring-[#fde047]/50'
                 }`}
                 style={{
                   boxShadow: expandedIndex === index
-                    ? `0 20px 40px -12px ${index % 2 === 0 ? '#15803d' : '#0f172a'}50`
-                    : `0 10px 30px -10px ${index % 2 === 0 ? '#15803d' : '#0f172a'}40`,
+                    ? '0 20px 40px -12px rgba(15, 23, 42, 0.4)'
+                    : '0 10px 30px -10px rgba(15, 23, 42, 0.3)',
                 }}
               >
-                {member.initials}
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  width={112}
+                  height={112}
+                  className="w-full h-full object-cover"
+                />
               </div>
               <h3 className="font-bold text-[#0f172a] text-base lg:text-lg mt-4">{member.name}</h3>
               <p className="text-sm lg:text-base text-[#64748b] mt-1">{member.role}</p>
