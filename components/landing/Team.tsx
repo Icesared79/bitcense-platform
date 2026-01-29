@@ -18,7 +18,7 @@ export function Team() {
       name: 'Joseph Joyce',
       role: 'Co-Founder & CPO',
       initials: 'JJ',
-      bio: "Joe directs product vision using his expertise in commercial real estate finance and blockchain. He previously co-founded a real estate tokenization platform. He holds an M.S. in Financial Analysis from St. Mary's College.",
+      bio: "Joe directs product vision using his expertise in commercial real estate finance and capital markets. He previously co-founded a real estate technology platform. He holds an M.S. in Financial Analysis from St. Mary's College.",
       linkedin: '#',
       email: '#',
     },
