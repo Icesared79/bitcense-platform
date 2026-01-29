@@ -17,7 +17,7 @@ export function Header() {
   }, [])
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-white/50 backdrop-blur-sm'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md' : 'bg-white/80 backdrop-blur-sm'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <Link href="/" className="flex items-center space-x-3 group">
@@ -31,28 +31,28 @@ export function Header() {
             <span className="text-xl font-bold text-[#0f172a]">BitCense</span>
           </Link>
 
-          <nav className="hidden md:flex items-center space-x-1">
-            <a href="#how-it-works" className="text-gray-600 hover:text-[#0f172a] hover:bg-gray-100 transition-all px-4 py-2 rounded-lg text-sm font-medium">
+          <nav className="hidden md:flex items-center space-x-8">
+            <a href="#how-it-works" className="text-[#334155] hover:text-[#0f172a] transition-colors text-base font-medium">
               How It Works
             </a>
-            <a href="#features" className="text-gray-600 hover:text-[#0f172a] hover:bg-gray-100 transition-all px-4 py-2 rounded-lg text-sm font-medium">
+            <a href="#features" className="text-[#334155] hover:text-[#0f172a] transition-colors text-base font-medium">
               Why BitCense
             </a>
-            <a href="#team" className="text-gray-600 hover:text-[#0f172a] hover:bg-gray-100 transition-all px-4 py-2 rounded-lg text-sm font-medium">
+            <a href="#team" className="text-[#334155] hover:text-[#0f172a] transition-colors text-base font-medium">
               Team
             </a>
           </nav>
 
-          <div className="hidden md:flex items-center space-x-3">
+          <div className="hidden md:flex items-center space-x-4">
             <Link
               href="/login"
-              className="text-gray-600 hover:text-[#0f172a] hover:bg-gray-100 px-4 py-2.5 rounded-lg text-sm font-medium transition-all"
+              className="text-[#334155] hover:text-[#0f172a] px-4 py-2 text-base font-medium transition-colors"
             >
               Log in
             </Link>
             <a
               href="#get-started"
-              className="bg-[#4A7C59] text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-[#3A6C49] transition-all shadow-md shadow-[#4A7C59]/25 hover:shadow-lg hover:shadow-[#4A7C59]/30 hover:-translate-y-0.5 active:translate-y-0"
+              className="bg-[#15803d] text-white px-6 py-3 rounded-xl text-base font-semibold hover:bg-[#166534] transition-all shadow-md shadow-[#15803d]/20 hover:shadow-lg hover:shadow-[#15803d]/25 hover:-translate-y-0.5 active:translate-y-0"
             >
               Get Started
             </a>
@@ -60,7 +60,7 @@ export function Header() {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="md:hidden p-2 hover:bg-[#f1f5f9] rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <svg className="w-6 h-6 text-[#0f172a]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,14 +75,14 @@ export function Header() {
 
         {/* Mobile menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-100 bg-white/95 backdrop-blur-md rounded-b-2xl shadow-lg">
-            <nav className="flex flex-col space-y-1 px-2">
-              <a href="#how-it-works" className="text-gray-600 hover:text-[#0f172a] hover:bg-gray-100 text-sm font-medium px-4 py-3 rounded-lg transition-colors">How It Works</a>
-              <a href="#features" className="text-gray-600 hover:text-[#0f172a] hover:bg-gray-100 text-sm font-medium px-4 py-3 rounded-lg transition-colors">Why BitCense</a>
-              <a href="#team" className="text-gray-600 hover:text-[#0f172a] hover:bg-gray-100 text-sm font-medium px-4 py-3 rounded-lg transition-colors">Team</a>
-              <div className="pt-4 mt-4 border-t border-gray-100 flex flex-col space-y-3 px-2">
-                <Link href="/login" className="text-gray-600 text-sm font-medium px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors">Log in</Link>
-                <a href="#get-started" className="bg-[#4A7C59] text-white px-5 py-3 rounded-full text-sm font-semibold text-center shadow-md shadow-[#4A7C59]/25">
+          <div className="md:hidden py-6 border-t border-[#e2e8f0]">
+            <nav className="flex flex-col space-y-4">
+              <a href="#how-it-works" className="text-[#334155] hover:text-[#0f172a] text-base font-medium py-2">How It Works</a>
+              <a href="#features" className="text-[#334155] hover:text-[#0f172a] text-base font-medium py-2">Why BitCense</a>
+              <a href="#team" className="text-[#334155] hover:text-[#0f172a] text-base font-medium py-2">Team</a>
+              <div className="pt-4 border-t border-[#e2e8f0] flex flex-col space-y-3">
+                <Link href="/login" className="text-[#334155] text-base font-medium py-2">Log in</Link>
+                <a href="#get-started" className="bg-[#15803d] text-white px-6 py-3 rounded-xl text-base font-semibold text-center">
                   Get Started
                 </a>
               </div>
