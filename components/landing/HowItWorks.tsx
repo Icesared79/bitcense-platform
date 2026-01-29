@@ -4,34 +4,16 @@ export function HowItWorks() {
       number: '01',
       title: 'Submit',
       description: 'Tell us about your asset. Simple form, takes 2 minutes.',
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-        </svg>
-      ),
-      iconBg: 'bg-[#15803d]',
     },
     {
       number: '02',
       title: 'Qualify',
       description: 'We analyze, score, and package your asset for distribution.',
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-        </svg>
-      ),
-      iconBg: 'bg-[#0f172a]',
     },
     {
       number: '03',
       title: 'Distribute',
       description: 'Access global retail investors through our licensed partners.',
-      icon: (
-        <svg className="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-      iconBg: 'bg-[#15803d]',
     },
   ]
 
@@ -40,36 +22,68 @@ export function HowItWorks() {
       {/* Top border accent */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#e2e8f0] to-transparent" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#0f172a] leading-tight tracking-tight">
-            Three Simple Steps to Global Distribution
+            Three Simple Steps
           </h2>
           <p className="mt-6 text-xl text-[#334155] leading-relaxed">
-            From submission to distribution, we handle the complexity so you can focus on your assets.
+            From submission to global distribution.
           </p>
         </div>
 
-        {/* Steps */}
+        {/* Steps - Connected Flow */}
         <div className="relative">
-          {/* Connection line - yellow accent */}
-          <div className="hidden lg:block absolute top-[60px] left-[20%] right-[20%] h-1 bg-gradient-to-r from-[#fde047] via-[#fef08a] to-[#fde047] rounded-full" />
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {steps.map((step) => (
-              <div key={step.number} className="relative group">
-                <div className="bg-white rounded-2xl p-8 lg:p-10 border border-[#e2e8f0] shadow-lg hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
-                  <div className="flex items-start justify-between mb-8">
-                    <div className={`w-14 h-14 ${step.iconBg} rounded-xl flex items-center justify-center text-white shadow-lg`}>
-                      {step.icon}
-                    </div>
-                    <span className="text-6xl lg:text-7xl font-extrabold text-[#15803d]">{step.number}</span>
+          {/* Desktop: Horizontal layout */}
+          <div className="hidden lg:flex items-start justify-between">
+            {steps.map((step, index) => (
+              <div key={step.number} className="flex items-start flex-1">
+                {/* Step content */}
+                <div className="flex flex-col items-center text-center flex-1">
+                  {/* Number circle */}
+                  <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 relative z-10">
+                    {step.number}
                   </div>
-                  <h3 className="text-2xl font-bold text-[#0f172a] mb-3">{step.title}</h3>
-                  <p className="text-lg text-[#334155] leading-relaxed">{step.description}</p>
+
+                  {/* Title and description */}
+                  <h3 className="text-2xl font-bold text-[#0f172a] mt-6 mb-3">{step.title}</h3>
+                  <p className="text-base text-[#64748b] leading-relaxed max-w-[200px]">{step.description}</p>
                 </div>
+
+                {/* Connector arrow (not on last item) */}
+                {index < steps.length - 1 && (
+                  <div className="flex items-center mt-10 -mx-4">
+                    <div className="w-16 h-0.5 bg-[#fde047]" />
+                    <svg className="w-5 h-5 text-[#fde047] -ml-1" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                )}
               </div>
             ))}
+          </div>
+
+          {/* Mobile: Vertical layout with connecting line */}
+          <div className="lg:hidden relative">
+            {/* Vertical connecting line */}
+            <div className="absolute left-10 top-10 bottom-10 w-0.5 bg-[#fde047]" />
+
+            <div className="space-y-12">
+              {steps.map((step, index) => (
+                <div key={step.number} className="flex items-start gap-6">
+                  {/* Number circle */}
+                  <div className="w-20 h-20 rounded-full bg-[#15803d] flex items-center justify-center text-white text-2xl font-bold shadow-lg shadow-[#15803d]/25 relative z-10 flex-shrink-0">
+                    {step.number}
+                  </div>
+
+                  {/* Content */}
+                  <div className="pt-4">
+                    <h3 className="text-xl font-bold text-[#0f172a] mb-2">{step.title}</h3>
+                    <p className="text-base text-[#64748b] leading-relaxed">{step.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
