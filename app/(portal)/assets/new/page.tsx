@@ -71,25 +71,17 @@ export default function NewAssetPage() {
     }
 
     // Ensure user exists in public.users table (defensive check)
-    const { data: existingUser } = await supabase
-      .from('users')
-      .select('id')
-      .eq('id', user.id)
-      .single()
+    // Use upsert to handle both cases: user exists or needs to be created
+    const { error: userError } = await supabase.from('users').upsert({
+      id: user.id,
+      email: user.email!,
+      full_name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
+      role: 'client',
+    }, { onConflict: 'id', ignoreDuplicates: true })
 
-    if (!existingUser) {
-      const { error: userError } = await supabase.from('users').insert({
-        id: user.id,
-        email: user.email!,
-        full_name: user.user_metadata?.full_name || user.email?.split('@')[0] || 'User',
-        role: 'client',
-      })
-      if (userError) {
-        console.error('Error creating user record:', userError)
-        setError('Account setup failed. Please contact support.')
-        setIsSubmitting(false)
-        return
-      }
+    if (userError) {
+      console.error('Error ensuring user record:', userError)
+      // Don't block - the trigger should have created the user
     }
 
     const parseNumber = (val: string): number | null => {
