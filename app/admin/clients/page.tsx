@@ -51,14 +51,17 @@ export default async function ClientsPage() {
                   {clients.map((client) => {
                     const assetCount = client.assets?.length || 0
                     const qualifiedCount = client.assets?.filter(
-                      (a: { status: string }) => a.status === 'qualified'
+                      (a: { status: string }) =>
+                        a.status === 'qualification_complete' ||
+                        a.status === 'sent_to_distribution' ||
+                        a.status === 'live'
                     ).length || 0
 
                     return (
                       <tr key={client.id} className="hover:bg-gray-50">
                         <td className="px-6 py-4">
                           <div>
-                            <p className="font-medium text-gray-900">{client.name}</p>
+                            <p className="font-medium text-gray-900">{client.full_name}</p>
                             <p className="text-sm text-gray-500">{client.email}</p>
                             {client.phone && (
                               <p className="text-sm text-gray-400">{client.phone}</p>
@@ -67,7 +70,7 @@ export default async function ClientsPage() {
                         </td>
                         <td className="px-6 py-4">
                           <p className="text-sm text-gray-900">
-                            {client.company || '-'}
+                            {client.company_name || '-'}
                           </p>
                         </td>
                         <td className="px-6 py-4">
@@ -85,7 +88,7 @@ export default async function ClientsPage() {
                           <div className="flex items-center justify-end gap-3">
                             <Link
                               href={`/admin/assets?client=${client.id}`}
-                              className="text-blue-600 hover:text-blue-700 text-sm font-medium"
+                              className="text-green-600 hover:text-green-700 text-sm font-medium"
                             >
                               View Assets
                             </Link>

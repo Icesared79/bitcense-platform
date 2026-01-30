@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
-import { User } from '@/types/database'
+import type { User } from '@/lib/types'
 
 interface AdminSidebarProps {
   user: User | null
@@ -67,12 +67,12 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
         <div className="flex flex-col flex-grow bg-white border-r border-gray-200 pt-5 pb-4 overflow-y-auto">
           <div className="flex items-center flex-shrink-0 px-4">
             <Link href="/admin" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">BC</span>
               </div>
               <div>
                 <span className="text-xl font-bold text-gray-900">BitCense</span>
-                <span className="ml-2 text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">Admin</span>
+                <span className="ml-2 text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded">Admin</span>
               </div>
             </Link>
           </div>
@@ -85,13 +85,13 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
                   className={cn(
                     'group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors',
                     pathname === item.href
-                      ? 'bg-blue-50 text-blue-700'
+                      ? 'bg-green-50 text-green-700'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                   )}
                 >
                   <span className={cn(
                     'mr-3',
-                    pathname === item.href ? 'text-blue-600' : 'text-gray-400 group-hover:text-gray-500'
+                    pathname === item.href ? 'text-green-600' : 'text-gray-400 group-hover:text-gray-500'
                   )}>
                     {item.icon}
                   </span>
@@ -104,7 +104,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
             <div className="flex-shrink-0 w-full group block">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-700">{user?.name}</p>
+                  <p className="text-sm font-medium text-gray-700">{user?.full_name || 'Admin'}</p>
                   <p className="text-xs text-gray-500">{user?.email}</p>
                 </div>
                 <button
@@ -126,7 +126,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       <div className="lg:hidden bg-white border-b border-gray-200 px-4 py-3">
         <div className="flex items-center justify-between">
           <Link href="/admin" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">BC</span>
             </div>
             <span className="text-lg font-bold text-gray-900">Admin</span>
@@ -146,7 +146,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
               className={cn(
                 'flex items-center px-3 py-2 text-sm font-medium rounded-lg whitespace-nowrap',
                 pathname === item.href
-                  ? 'bg-blue-50 text-blue-700'
+                  ? 'bg-green-50 text-green-700'
                   : 'text-gray-600 hover:bg-gray-50'
               )}
             >

@@ -26,7 +26,7 @@ export async function GET(request: Request) {
           await supabase.from('users').insert({
             id: user.id,
             email: user.email!,
-            name: user.email!.split('@')[0],
+            full_name: user.user_metadata?.full_name || user.email!.split('@')[0],
             role: 'client',
           })
         }

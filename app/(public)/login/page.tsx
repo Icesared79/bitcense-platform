@@ -2,110 +2,221 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
-import { Input } from '@/components/ui/Input'
 
 export default function LoginPage() {
+  const router = useRouter()
+  const [isLogin, setIsLogin] = useState(true)
   const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [name, setName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [successMessage, setSuccessMessage] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setIsLoading(true)
     setError(null)
+    setSuccessMessage(null)
 
     const supabase = createClient()
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: `${window.location.origin}/api/auth/callback`,
-      },
-    })
+    if (isLogin) {
+      // Sign in
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
 
-    setIsLoading(false)
+      if (error) {
+        setError(error.message)
+        setIsLoading(false)
+      } else if (data.user) {
+        // Ensure user record exists in users table
+        const { data: userData } = await supabase
+          .from('users')
+          .select('id')
+          .eq('id', data.user.id)
+          .single()
 
-    if (error) {
-      setError(error.message)
+        if (!userData) {
+          const { error: insertError } = await supabase.from('users').insert({
+            id: data.user.id,
+            email: data.user.email!,
+            full_name: data.user.user_metadata?.full_name || data.user.email!.split('@')[0],
+            role: 'client',
+          })
+
+          if (insertError) {
+            console.error('Error creating user record:', insertError)
+            setError('Failed to set up your account. Please try again.')
+            setIsLoading(false)
+            return
+          }
+        }
+
+        // Check role for redirect
+        const { data: roleData } = await supabase
+          .from('users')
+          .select('role')
+          .eq('id', data.user.id)
+          .single()
+
+        router.push(roleData?.role === 'admin' ? '/admin' : '/dashboard')
+      }
     } else {
-      setIsSuccess(true)
+      // Sign up
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            full_name: name,
+          },
+        },
+      })
+
+      if (error) {
+        setError(error.message)
+        setIsLoading(false)
+      } else if (data.user && !data.session) {
+        // Email confirmation required
+        setSuccessMessage('Check your email to confirm your account.')
+        setIsLoading(false)
+      } else if (data.user && data.session) {
+        // Auto-confirmed - create user record
+        const { error: insertError } = await supabase.from('users').insert({
+          id: data.user.id,
+          email: data.user.email!,
+          full_name: name || data.user.email!.split('@')[0],
+          role: 'client',
+        })
+
+        if (insertError) {
+          console.error('Error creating user record:', insertError)
+          setError('Account created but setup failed. Please sign in again.')
+          setIsLoading(false)
+          return
+        }
+        router.push('/dashboard')
+      }
     }
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4">
+      <div className="max-w-sm w-full">
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-2">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold">BC</span>
-            </div>
-            <span className="text-2xl font-bold text-gray-900">BitCense</span>
+            <Image
+              src="/logo-icon.png"
+              alt="BitCense"
+              width={32}
+              height={32}
+            />
+            <span className="text-xl font-semibold text-gray-900">BitCense</span>
           </Link>
-          <h2 className="mt-6 text-3xl font-bold text-gray-900">
-            Sign in to your portal
-          </h2>
-          <p className="mt-2 text-gray-600">
-            Enter your email and we&apos;ll send you a magic link to sign in.
-          </p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
-          {isSuccess ? (
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Check your email</h3>
-              <p className="text-gray-600">
-                We&apos;ve sent a magic link to <strong>{email}</strong>. Click the link to sign in.
-              </p>
-              <button
-                onClick={() => {
-                  setIsSuccess(false)
-                  setEmail('')
-                }}
-                className="mt-4 text-blue-600 hover:text-blue-700 font-medium"
-              >
-                Try a different email
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {error && (
-                <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
-                  {error}
-                </div>
-              )}
+        <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-8">
+          <h2 className="text-xl font-semibold text-gray-900 text-center mb-6">
+            {isLogin ? 'Sign in' : 'Create account'}
+          </h2>
 
-              <Input
+          {successMessage && (
+            <div className="mb-4 p-3 bg-green-50 border border-green-100 rounded-lg text-green-700 text-sm">
+              {successMessage}
+            </div>
+          )}
+
+          {error && (
+            <div className="mb-4 p-3 bg-red-50 border border-red-100 rounded-lg text-red-700 text-sm">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {!isLogin && (
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1.5">
+                  Full name
+                </label>
+                <input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required={!isLogin}
+                  placeholder="John Smith"
+                  className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+                />
+              </div>
+            )}
+
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
+                Email
+              </label>
+              <input
                 id="email"
                 type="email"
-                label="Email address"
-                placeholder="you@company.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                placeholder="you@company.com"
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
               />
+            </div>
 
-              <Button type="submit" className="w-full" isLoading={isLoading}>
-                Send Magic Link
-              </Button>
-            </form>
-          )}
+            <div>
+              <div className="flex items-center justify-between mb-1.5">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+                {isLogin && (
+                  <Link href="/forgot-password" className="text-sm text-green-600 hover:text-green-700">
+                    Forgot password?
+                  </Link>
+                )}
+              </div>
+              <input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={6}
+                placeholder={isLogin ? '••••••••' : 'At least 6 characters'}
+                className="w-full px-3 py-2.5 border border-gray-200 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500"
+              />
+            </div>
+
+            <Button type="submit" className="w-full" isLoading={isLoading}>
+              {isLogin ? 'Sign in' : 'Create account'}
+            </Button>
+          </form>
+
+          <div className="mt-6 text-center">
+            <button
+              type="button"
+              onClick={() => {
+                setIsLogin(!isLogin)
+                setError(null)
+                setSuccessMessage(null)
+              }}
+              className="text-sm text-gray-600 hover:text-gray-900"
+            >
+              {isLogin ? "Don't have an account? " : 'Already have an account? '}
+              <span className="font-medium text-green-600 hover:text-green-700">
+                {isLogin ? 'Sign up' : 'Sign in'}
+              </span>
+            </button>
+          </div>
         </div>
-
-        <p className="mt-6 text-center text-sm text-gray-600">
-          Don&apos;t have an account?{' '}
-          <Link href="/#" className="text-blue-600 hover:text-blue-700 font-medium">
-            Submit a lead to get started
-          </Link>
-        </p>
       </div>
     </div>
   )

@@ -2,10 +2,8 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { useFadeIn } from '@/hooks/useFadeIn'
 
 export function Footer() {
-  const { ref, isVisible } = useFadeIn(0.1)
   const scrollToForm = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     const element = document.getElementById('get-started')
@@ -15,49 +13,41 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-gradient-to-b from-[#0f172a] to-[#1e293b] text-white relative">
-      {/* Top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#15803d] via-[#15803d]/50 to-[#15803d]" />
-
+    <footer className="bg-gray-900 text-white">
       {/* CTA Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
-        <div ref={ref} className={`text-center max-w-3xl mx-auto fade-in-section ${isVisible ? 'visible' : ''}`}>
-          <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tight mb-6">
-            Ready to Reach Global Investors?
+      <div className="max-w-6xl mx-auto px-6 py-24">
+        <div className="max-w-lg">
+          <h2 className="text-2xl font-bold mb-4">
+            Ready to get started?
           </h2>
-          <p className="text-xl text-[#94a3b8] mb-10 leading-relaxed">
-            Submit your information and our team will reach out within 24 hours to discuss how BitCense can help distribute your assets globally.
+          <p className="text-gray-400 leading-relaxed mb-8">
+            Submit your information and we'll reach out within 24 hours.
           </p>
           <a
             href="#get-started"
             onClick={scrollToForm}
-            className="inline-flex items-center bg-[#15803d] text-white px-10 py-5 rounded-xl text-lg font-semibold hover:bg-[#166534] transition-all duration-200 shadow-lg shadow-[#15803d]/25 hover:shadow-xl hover:shadow-[#15803d]/30 hover:-translate-y-0.5 active:translate-y-0"
+            className="inline-block bg-green-600 text-white px-8 py-3.5 rounded-lg font-medium hover:bg-green-700 transition-colors"
           >
             Get Started
-            <svg className="ml-3 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-            </svg>
           </a>
         </div>
       </div>
 
-      {/* Footer Bottom */}
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex items-center space-x-3 mb-4 md:mb-0">
-              <Link href="/" className="flex items-center space-x-3 group">
-                <Image
-                  src="/logo-icon.png"
-                  alt="BitCense"
-                  width={32}
-                  height={32}
-                  className="invert brightness-200 group-hover:scale-105 transition-transform duration-200"
-                />
-                <span className="text-xl font-bold">BitCense</span>
-              </Link>
-            </div>
-            <p className="text-[#64748b] text-base">
+      {/* Bottom */}
+      <div className="border-t border-gray-800">
+        <div className="max-w-6xl mx-auto px-6 py-6">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image
+                src="/logo-icon.png"
+                alt="BitCense"
+                width={24}
+                height={24}
+                className="invert brightness-200"
+              />
+              <span className="font-semibold">BitCense</span>
+            </Link>
+            <p className="text-gray-500 text-sm">
               &copy; 2026 BitCense. All rights reserved.
             </p>
           </div>

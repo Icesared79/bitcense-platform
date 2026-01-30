@@ -3,7 +3,7 @@ import { cn } from '@/lib/utils'
 interface ProgressBarProps {
   value: number // 0-100
   size?: 'sm' | 'md' | 'lg'
-  variant?: 'default' | 'success' | 'warning' | 'accent'
+  variant?: 'default' | 'success' | 'warning' | 'accent' | 'error'
   showLabel?: boolean
   className?: string
 }
@@ -28,6 +28,7 @@ export function ProgressBar({
     success: 'bg-[#15803d]',
     warning: 'bg-[#f59e0b]',
     accent: 'bg-[#fde047]',
+    error: 'bg-[#dc2626]',
   }
 
   return (

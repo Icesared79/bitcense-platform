@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/Button'
 import { inviteLeadToPortal } from '@/app/actions/admin'
-import { Lead } from '@/types/database'
+import type { Lead } from '@/lib/types'
 import { useRouter } from 'next/navigation'
 
 interface InviteButtonProps {

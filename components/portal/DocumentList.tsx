@@ -1,9 +1,11 @@
 'use client'
 
 import { createClient } from '@/lib/supabase/client'
-import { Document } from '@/types/database'
+import type { Document, ActivityType } from '@/lib/types'
+import { DOCUMENT_CATEGORY_LABELS } from '@/lib/types'
 import { formatDateTime } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
+import { Badge } from '@/components/ui/Badge'
 
 interface DocumentListProps {
   documents: Document[]
@@ -16,18 +18,25 @@ function formatFileSize(bytes: number): string {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
 }
 
-function getFileIcon(fileType: string) {
-  if (fileType.includes('pdf')) {
+function getFileIcon(mimeType: string) {
+  if (mimeType.includes('pdf')) {
     return (
       <svg className="w-8 h-8 text-red-500" fill="currentColor" viewBox="0 0 20 20">
         <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
       </svg>
     )
   }
-  if (fileType.includes('image')) {
+  if (mimeType.includes('image')) {
     return (
       <svg className="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
         <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+      </svg>
+    )
+  }
+  if (mimeType.includes('spreadsheet') || mimeType.includes('excel')) {
+    return (
+      <svg className="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+        <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clipRule="evenodd" />
       </svg>
     )
   }
@@ -66,11 +75,13 @@ export function DocumentList({ documents, assetId }: DocumentListProps) {
     // Log activity
     const { data: { user } } = await supabase.auth.getUser()
     if (user) {
+      const activityType: ActivityType = 'document_uploaded' // Using closest available type
       await supabase.from('activity_log').insert({
         asset_id: assetId,
         user_id: user.id,
-        action: 'Document Deleted',
-        details: `Deleted: ${doc.name}`,
+        activity_type: activityType,
+        description: `Document deleted: ${doc.name}`,
+        is_client_visible: true,
       })
     }
 
@@ -93,18 +104,24 @@ export function DocumentList({ documents, assetId }: DocumentListProps) {
           className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
         >
           <div className="flex items-center gap-3">
-            {getFileIcon(doc.file_type)}
+            {getFileIcon(doc.mime_type)}
             <div>
               <p className="text-sm font-medium text-gray-900">{doc.name}</p>
               <p className="text-xs text-gray-500">
-                {formatFileSize(doc.file_size)} - {formatDateTime(doc.created_at)}
+                {DOCUMENT_CATEGORY_LABELS[doc.category]} • {formatFileSize(doc.file_size)} • {formatDateTime(doc.uploaded_at)}
               </p>
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <Badge
+              variant={doc.status === 'approved' ? 'success' : doc.status === 'rejected' ? 'error' : 'default'}
+              size="sm"
+            >
+              {doc.status}
+            </Badge>
             <button
               onClick={() => handleDownload(doc)}
-              className="p-2 text-gray-400 hover:text-blue-600 transition-colors"
+              className="p-2 text-gray-400 hover:text-green-600 transition-colors"
               title="Download"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

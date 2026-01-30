@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/Button'
 import { Select } from '@/components/ui/Select'
 import { Input } from '@/components/ui/Input'
 import { Textarea } from '@/components/ui/Textarea'
-import { Asset, AssetStatus } from '@/types/database'
-import { updateAssetStatus } from '@/app/actions/admin'
+import type { Asset, AssetStatus, ScoreGrade } from '@/lib/types'
+import { updateAssetStatus, sendToDistribution } from '@/app/actions/admin'
 
 interface AdminAssetFormProps {
   asset: Asset
@@ -15,31 +15,35 @@ interface AdminAssetFormProps {
 
 const statusOptions = [
   { value: 'submitted', label: 'Submitted' },
-  { value: 'under_review', label: 'Under Review' },
-  { value: 'additional_info_needed', label: 'Additional Info Needed' },
-  { value: 'qualified', label: 'Qualified' },
-  { value: 'not_qualified', label: 'Not Qualified' },
+  { value: 'in_review', label: 'In Review' },
+  { value: 'qualification_complete', label: 'Qualification Complete' },
+  { value: 'sent_to_distribution', label: 'Sent to Distribution' },
+  { value: 'live', label: 'Live' },
+  { value: 'rejected', label: 'Rejected' },
 ]
 
 const gradeOptions = [
+  { value: '', label: 'Select grade...' },
   { value: 'A', label: 'A - Excellent' },
   { value: 'B', label: 'B - Good' },
-  { value: 'C', label: 'C - Average' },
-  { value: 'D', label: 'D - Below Average' },
-  { value: 'F', label: 'F - Poor' },
+  { value: 'C', label: 'C - Fair' },
+  { value: 'D', label: 'D - Needs Work' },
+  { value: 'F', label: 'F - Not Qualified' },
 ]
 
 export function AdminAssetForm({ asset }: AdminAssetFormProps) {
   const router = useRouter()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSendingToDistribution, setIsSendingToDistribution] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState(false)
 
   const [status, setStatus] = useState<AssetStatus>(asset.status)
   const [feedback, setFeedback] = useState(asset.feedback || '')
   const [internalNotes, setInternalNotes] = useState(asset.internal_notes || '')
+  const [recommendation, setRecommendation] = useState(asset.recommendation || '')
   const [score, setScore] = useState(asset.score?.toString() || '')
-  const [grade, setGrade] = useState(asset.grade || '')
+  const [grade, setGrade] = useState<ScoreGrade | ''>(asset.grade || '')
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -51,6 +55,7 @@ export function AdminAssetForm({ asset }: AdminAssetFormProps) {
       status,
       feedback: feedback || null,
       internal_notes: internalNotes || null,
+      recommendation: recommendation || null,
       score: score ? parseInt(score) : null,
       grade: grade || null,
     })
@@ -65,6 +70,24 @@ export function AdminAssetForm({ asset }: AdminAssetFormProps) {
       setError(result.error || 'Failed to update asset')
     }
   }
+
+  async function handleSendToDistribution() {
+    setIsSendingToDistribution(true)
+    setError(null)
+
+    const result = await sendToDistribution(asset.id, 'Optima')
+
+    setIsSendingToDistribution(false)
+
+    if (result.success) {
+      setSuccess(true)
+      router.refresh()
+    } else {
+      setError(result.error || 'Failed to send to distribution')
+    }
+  }
+
+  const canSendToDistribution = asset.status === 'qualification_complete' && asset.score !== null
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -94,7 +117,7 @@ export function AdminAssetForm({ asset }: AdminAssetFormProps) {
           label="Grade"
           options={gradeOptions}
           value={grade}
-          onChange={(e) => setGrade(e.target.value)}
+          onChange={(e) => setGrade(e.target.value as ScoreGrade | '')}
         />
       </div>
 
@@ -106,6 +129,15 @@ export function AdminAssetForm({ asset }: AdminAssetFormProps) {
         onChange={(e) => setScore(e.target.value)}
         min={0}
         max={100}
+      />
+
+      <Textarea
+        id="recommendation"
+        label="Recommendation"
+        value={recommendation}
+        onChange={(e) => setRecommendation(e.target.value)}
+        rows={2}
+        placeholder="Summary recommendation for this asset..."
       />
 
       <Textarea
@@ -130,6 +162,17 @@ export function AdminAssetForm({ asset }: AdminAssetFormProps) {
         <Button type="submit" isLoading={isSubmitting}>
           Save Changes
         </Button>
+
+        {canSendToDistribution && (
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={handleSendToDistribution}
+            isLoading={isSendingToDistribution}
+          >
+            Send to Optima
+          </Button>
+        )}
       </div>
     </form>
   )

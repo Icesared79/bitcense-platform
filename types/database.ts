@@ -1,3 +1,8 @@
+/**
+ * Supabase Database Types
+ * Generated from BitCense Connect schema
+ */
+
 export type Json =
   | string
   | number
@@ -6,219 +11,300 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export type UserRole = 'admin' | 'client'
+// Re-export types from lib/types for convenience
+export type {
+  UserRole,
+  LeadStatus,
+  AssetType,
+  AssetStatus,
+  ScoreGrade,
+  DocumentCategory,
+  DocumentStatus,
+  ActivityType,
+  User,
+  Lead,
+  Asset,
+  Document,
+  ActivityLog,
+  ScoreBreakdown,
+  ScoreCategory,
+  ScoreMetric,
+} from '@/lib/types'
 
-export type LeadStatus = 'new' | 'invited' | 'active'
-
-export type AssetStatus =
-  | 'submitted'
-  | 'under_review'
-  | 'additional_info_needed'
-  | 'qualified'
-  | 'not_qualified'
-
-export type AssetType =
-  | 'real_estate'
-  | 'equipment'
-  | 'inventory'
-  | 'accounts_receivable'
-  | 'intellectual_property'
-  | 'other'
+import type {
+  UserRole,
+  LeadStatus,
+  AssetType,
+  AssetStatus,
+  ScoreGrade,
+  DocumentCategory,
+  DocumentStatus,
+  ActivityType,
+} from '@/lib/types'
 
 export interface Database {
   public: {
     Tables: {
-      leads: {
-        Row: {
-          id: string
-          created_at: string
-          updated_at: string
-          name: string
-          email: string
-          company: string | null
-          phone: string | null
-          asset_type: AssetType
-          asset_value: string | null
-          location: string | null
-          message: string | null
-          status: LeadStatus
-        }
-        Insert: {
-          id?: string
-          created_at?: string
-          updated_at?: string
-          name: string
-          email: string
-          company?: string | null
-          phone?: string | null
-          asset_type: AssetType
-          asset_value?: string | null
-          location?: string | null
-          message?: string | null
-          status?: LeadStatus
-        }
-        Update: {
-          id?: string
-          created_at?: string
-          updated_at?: string
-          name?: string
-          email?: string
-          company?: string | null
-          phone?: string | null
-          asset_type?: AssetType
-          asset_value?: string | null
-          location?: string | null
-          message?: string | null
-          status?: LeadStatus
-        }
-      }
       users: {
         Row: {
           id: string
+          email: string
+          role: UserRole
+          full_name: string | null
+          company_name: string | null
+          phone: string | null
+          linkedin_url: string | null
+          lead_id: string | null
           created_at: string
           updated_at: string
-          email: string
-          name: string
-          company: string | null
-          phone: string | null
-          role: UserRole
-          lead_id: string | null
+          last_login_at: string | null
         }
         Insert: {
           id: string
+          email: string
+          role?: UserRole
+          full_name?: string | null
+          company_name?: string | null
+          phone?: string | null
+          linkedin_url?: string | null
+          lead_id?: string | null
           created_at?: string
           updated_at?: string
-          email: string
-          name: string
-          company?: string | null
-          phone?: string | null
-          role?: UserRole
-          lead_id?: string | null
+          last_login_at?: string | null
         }
         Update: {
           id?: string
+          email?: string
+          role?: UserRole
+          full_name?: string | null
+          company_name?: string | null
+          phone?: string | null
+          linkedin_url?: string | null
+          lead_id?: string | null
           created_at?: string
           updated_at?: string
-          email?: string
+          last_login_at?: string | null
+        }
+      }
+      leads: {
+        Row: {
+          id: string
+          name: string
+          email: string
+          asset_type: AssetType
+          location: 'us' | 'non_us'
+          linkedin_url: string | null
+          status: LeadStatus
+          notes: string | null
+          created_at: string
+          updated_at: string
+          contacted_at: string | null
+          invited_at: string | null
+          converted_at: string | null
+          converted_user_id: string | null
+        }
+        Insert: {
+          id?: string
+          name: string
+          email: string
+          asset_type: AssetType
+          location: 'us' | 'non_us'
+          linkedin_url?: string | null
+          status?: LeadStatus
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+          contacted_at?: string | null
+          invited_at?: string | null
+          converted_at?: string | null
+          converted_user_id?: string | null
+        }
+        Update: {
+          id?: string
           name?: string
-          company?: string | null
-          phone?: string | null
-          role?: UserRole
-          lead_id?: string | null
+          email?: string
+          asset_type?: AssetType
+          location?: 'us' | 'non_us'
+          linkedin_url?: string | null
+          status?: LeadStatus
+          notes?: string | null
+          created_at?: string
+          updated_at?: string
+          contacted_at?: string | null
+          invited_at?: string | null
+          converted_at?: string | null
+          converted_user_id?: string | null
         }
       }
       assets: {
         Row: {
           id: string
-          created_at: string
-          updated_at: string
           user_id: string
           name: string
-          type: AssetType
+          asset_type: AssetType
           description: string | null
-          estimated_value: number | null
-          location: string | null
+          isin: string | null
+          cusip: string | null
+          target_raise: number | null
+          minimum_investment: number | null
+          target_yield: number | null
+          term_months: number | null
+          issuer_name: string | null
+          issuer_jurisdiction: string | null
+          fund_structure: string | null
           status: AssetStatus
+          score: number | null
+          grade: ScoreGrade | null
           feedback: string | null
           internal_notes: string | null
-          score: number | null
-          grade: string | null
+          recommendation: string | null
+          score_breakdown: Json | null
+          created_at: string
+          updated_at: string
+          submitted_at: string | null
+          review_started_at: string | null
+          qualification_completed_at: string | null
+          sent_to_distribution_at: string | null
         }
         Insert: {
           id?: string
-          created_at?: string
-          updated_at?: string
           user_id: string
           name: string
-          type: AssetType
+          asset_type: AssetType
           description?: string | null
-          estimated_value?: number | null
-          location?: string | null
+          isin?: string | null
+          cusip?: string | null
+          target_raise?: number | null
+          minimum_investment?: number | null
+          target_yield?: number | null
+          term_months?: number | null
+          issuer_name?: string | null
+          issuer_jurisdiction?: string | null
+          fund_structure?: string | null
           status?: AssetStatus
+          score?: number | null
+          grade?: ScoreGrade | null
           feedback?: string | null
           internal_notes?: string | null
-          score?: number | null
-          grade?: string | null
+          recommendation?: string | null
+          score_breakdown?: Json | null
+          created_at?: string
+          updated_at?: string
+          submitted_at?: string | null
+          review_started_at?: string | null
+          qualification_completed_at?: string | null
+          sent_to_distribution_at?: string | null
         }
         Update: {
           id?: string
-          created_at?: string
-          updated_at?: string
           user_id?: string
           name?: string
-          type?: AssetType
+          asset_type?: AssetType
           description?: string | null
-          estimated_value?: number | null
-          location?: string | null
+          isin?: string | null
+          cusip?: string | null
+          target_raise?: number | null
+          minimum_investment?: number | null
+          target_yield?: number | null
+          term_months?: number | null
+          issuer_name?: string | null
+          issuer_jurisdiction?: string | null
+          fund_structure?: string | null
           status?: AssetStatus
+          score?: number | null
+          grade?: ScoreGrade | null
           feedback?: string | null
           internal_notes?: string | null
-          score?: number | null
-          grade?: string | null
+          recommendation?: string | null
+          score_breakdown?: Json | null
+          created_at?: string
+          updated_at?: string
+          submitted_at?: string | null
+          review_started_at?: string | null
+          qualification_completed_at?: string | null
+          sent_to_distribution_at?: string | null
         }
       }
       documents: {
         Row: {
           id: string
-          created_at: string
           asset_id: string
           user_id: string
           name: string
+          category: DocumentCategory
           file_path: string
-          file_type: string
           file_size: number
+          mime_type: string
+          status: DocumentStatus
+          notes: string | null
+          uploaded_at: string
+          reviewed_at: string | null
+          reviewed_by: string | null
         }
         Insert: {
           id?: string
-          created_at?: string
           asset_id: string
           user_id: string
           name: string
+          category: DocumentCategory
           file_path: string
-          file_type: string
           file_size: number
+          mime_type: string
+          status?: DocumentStatus
+          notes?: string | null
+          uploaded_at?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
         }
         Update: {
           id?: string
-          created_at?: string
           asset_id?: string
           user_id?: string
           name?: string
+          category?: DocumentCategory
           file_path?: string
-          file_type?: string
           file_size?: number
+          mime_type?: string
+          status?: DocumentStatus
+          notes?: string | null
+          uploaded_at?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
         }
       }
       activity_log: {
         Row: {
           id: string
-          created_at: string
           asset_id: string
           user_id: string | null
-          action: string
-          details: string | null
-          old_value: string | null
-          new_value: string | null
+          activity_type: ActivityType
+          description: string
+          previous_value: Json | null
+          new_value: Json | null
+          is_client_visible: boolean
+          created_at: string
         }
         Insert: {
           id?: string
-          created_at?: string
           asset_id: string
           user_id?: string | null
-          action: string
-          details?: string | null
-          old_value?: string | null
-          new_value?: string | null
+          activity_type: ActivityType
+          description: string
+          previous_value?: Json | null
+          new_value?: Json | null
+          is_client_visible?: boolean
+          created_at?: string
         }
         Update: {
           id?: string
-          created_at?: string
           asset_id?: string
           user_id?: string | null
-          action?: string
-          details?: string | null
-          old_value?: string | null
-          new_value?: string | null
+          activity_type?: ActivityType
+          description?: string
+          previous_value?: Json | null
+          new_value?: Json | null
+          is_client_visible?: boolean
+          created_at?: string
         }
       }
     }
@@ -226,44 +312,60 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: Record<PropertyKey, never>
+        Returns: boolean
+      }
     }
     Enums: {
       user_role: UserRole
       lead_status: LeadStatus
-      asset_status: AssetStatus
       asset_type: AssetType
+      asset_status: AssetStatus
+      score_grade: ScoreGrade
+      document_category: DocumentCategory
+      document_status: DocumentStatus
+      activity_type: ActivityType
     }
   }
 }
 
-// Convenience types
-export type Lead = Database['public']['Tables']['leads']['Row']
+// Convenience types for database operations
+export type LeadRow = Database['public']['Tables']['leads']['Row']
 export type LeadInsert = Database['public']['Tables']['leads']['Insert']
-export type User = Database['public']['Tables']['users']['Row']
+export type LeadUpdate = Database['public']['Tables']['leads']['Update']
+
+export type UserRow = Database['public']['Tables']['users']['Row']
 export type UserInsert = Database['public']['Tables']['users']['Insert']
-export type Asset = Database['public']['Tables']['assets']['Row']
+export type UserUpdate = Database['public']['Tables']['users']['Update']
+
+export type AssetRow = Database['public']['Tables']['assets']['Row']
 export type AssetInsert = Database['public']['Tables']['assets']['Insert']
-export type Document = Database['public']['Tables']['documents']['Row']
+export type AssetUpdate = Database['public']['Tables']['assets']['Update']
+
+export type DocumentRow = Database['public']['Tables']['documents']['Row']
 export type DocumentInsert = Database['public']['Tables']['documents']['Insert']
-export type ActivityLog = Database['public']['Tables']['activity_log']['Row']
+export type DocumentUpdate = Database['public']['Tables']['documents']['Update']
+
+export type ActivityLogRow = Database['public']['Tables']['activity_log']['Row']
 export type ActivityLogInsert = Database['public']['Tables']['activity_log']['Insert']
+export type ActivityLogUpdate = Database['public']['Tables']['activity_log']['Update']
 
 // Extended types with relations
-export type AssetWithUser = Asset & {
-  users: Pick<User, 'id' | 'name' | 'email' | 'company'>
+export type AssetWithUser = AssetRow & {
+  users: Pick<UserRow, 'id' | 'full_name' | 'email' | 'company_name'>
 }
 
-export type AssetWithDocuments = Asset & {
-  documents: Document[]
+export type AssetWithDocuments = AssetRow & {
+  documents: DocumentRow[]
 }
 
-export type AssetWithActivity = Asset & {
-  activity_log: ActivityLog[]
+export type AssetWithActivity = AssetRow & {
+  activity_log: ActivityLogRow[]
 }
 
-export type AssetFull = Asset & {
-  users: Pick<User, 'id' | 'name' | 'email' | 'company'>
-  documents: Document[]
-  activity_log: ActivityLog[]
+export type AssetFull = AssetRow & {
+  users: Pick<UserRow, 'id' | 'full_name' | 'email' | 'company_name'>
+  documents: DocumentRow[]
+  activity_log: ActivityLogRow[]
 }

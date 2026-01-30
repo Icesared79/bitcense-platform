@@ -2,26 +2,30 @@ import { createClient } from '@/lib/supabase/server'
 import { notFound } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
-import { Asset, AssetStatus, User, Document, ActivityLog } from '@/types/database'
-import { formatDate, formatDateTime } from '@/lib/utils'
+import {
+  ASSET_TYPE_LABELS,
+  ASSET_STATUS_CONFIG,
+  type Asset,
+  type AssetStatus,
+  type User,
+  type Document,
+  type ActivityLog,
+} from '@/lib/types'
+import { formatDate, formatDateTime, formatCompactCurrency } from '@/lib/utils'
 import { AdminAssetForm } from '@/components/admin/AdminAssetForm'
+import { ScoringForm } from '@/components/admin/ScoringForm'
+import { DocumentRequestForm } from '@/components/admin/DocumentRequestForm'
+import { ScoreBreakdownCard } from '@/components/scoring/ScoreBreakdownCard'
+import type { ScoreBreakdownData } from '@/lib/scoring'
 import Link from 'next/link'
 
-const statusConfig: Record<AssetStatus, { label: string; variant: 'default' | 'success' | 'warning' | 'error' | 'info' }> = {
-  submitted: { label: 'Submitted', variant: 'info' },
-  under_review: { label: 'Under Review', variant: 'warning' },
-  additional_info_needed: { label: 'Additional Info Needed', variant: 'error' },
-  qualified: { label: 'Qualified', variant: 'success' },
-  not_qualified: { label: 'Not Qualified', variant: 'default' },
-}
-
-const assetTypeLabels: Record<string, string> = {
-  real_estate: 'Real Estate',
-  equipment: 'Equipment',
-  inventory: 'Inventory',
-  accounts_receivable: 'Accounts Receivable',
-  intellectual_property: 'Intellectual Property',
-  other: 'Other',
+const statusBadgeVariant: Record<AssetStatus, 'default' | 'success' | 'warning' | 'error' | 'info' | 'accent'> = {
+  submitted: 'info',
+  in_review: 'warning',
+  qualification_complete: 'accent',
+  sent_to_distribution: 'info',
+  live: 'success',
+  rejected: 'error',
 }
 
 export default async function AdminAssetDetailPage({
@@ -36,7 +40,7 @@ export default async function AdminAssetDetailPage({
     .from('assets')
     .select(`
       *,
-      users (id, name, email, company, phone)
+      users (id, full_name, email, company_name, phone, linkedin_url)
     `)
     .eq('id', id)
     .single()
@@ -45,13 +49,15 @@ export default async function AdminAssetDetailPage({
     notFound()
   }
 
-  const asset = assetData as Asset & { users: Pick<User, 'id' | 'name' | 'email' | 'company' | 'phone'> | null }
+  const asset = assetData as Asset & {
+    users: Pick<User, 'id' | 'full_name' | 'email' | 'company_name' | 'phone' | 'linkedin_url'> | null
+  }
 
   const { data: documentsData } = await supabase
     .from('documents')
     .select('*')
     .eq('asset_id', asset.id)
-    .order('created_at', { ascending: false })
+    .order('uploaded_at', { ascending: false })
 
   const { data: activityLogData } = await supabase
     .from('activity_log')
@@ -62,12 +68,21 @@ export default async function AdminAssetDetailPage({
   const documents = (documentsData || []) as Document[]
   const activityLog = (activityLogData || []) as ActivityLog[]
 
-  const config = statusConfig[asset.status]
+  const statusConfig = ASSET_STATUS_CONFIG[asset.status]
+  const badgeVariant = statusBadgeVariant[asset.status]
+
+  // Check if we have a score breakdown
+  const scoreBreakdown = asset.score_breakdown as ScoreBreakdownData | null
+  const hasScoreBreakdown = scoreBreakdown && scoreBreakdown.categories && scoreBreakdown.categories.length > 0
+
+  // Determine which view to show
+  const showScoringForm = asset.status === 'submitted' || asset.status === 'in_review'
+  const showScoreBreakdown = hasScoreBreakdown && (asset.status === 'qualification_complete' || asset.status === 'sent_to_distribution' || asset.status === 'live' || asset.status === 'rejected')
 
   return (
     <div>
       <div className="mb-6">
-        <Link href="/admin/assets" className="text-blue-600 hover:text-blue-700 text-sm font-medium">
+        <Link href="/admin/assets" className="text-green-600 hover:text-green-700 text-sm font-medium">
           &larr; Back to Assets
         </Link>
       </div>
@@ -76,19 +91,20 @@ export default async function AdminAssetDetailPage({
         <div>
           <div className="flex items-center gap-3 mb-2">
             <h1 className="text-2xl font-bold text-gray-900">{asset.name}</h1>
-            <Badge variant={config.variant}>{config.label}</Badge>
+            <Badge variant={badgeVariant}>{statusConfig.label}</Badge>
           </div>
           <div className="flex items-center gap-4 text-sm text-gray-500">
-            <span>{assetTypeLabels[asset.type]}</span>
-            {asset.location && <span>{asset.location}</span>}
+            <span>{ASSET_TYPE_LABELS[asset.asset_type]}</span>
+            {asset.isin && <span className="font-mono">ISIN: {asset.isin}</span>}
+            {asset.cusip && <span className="font-mono">CUSIP: {asset.cusip}</span>}
             <span>Submitted {formatDate(asset.created_at)}</span>
           </div>
         </div>
-        {asset.estimated_value && (
+        {asset.target_raise && (
           <div className="text-right">
-            <p className="text-sm text-gray-500">Estimated Value</p>
+            <p className="text-sm text-gray-500">Target Raise</p>
             <p className="text-2xl font-bold text-gray-900">
-              ${Number(asset.estimated_value).toLocaleString()}
+              {formatCompactCurrency(asset.target_raise / 100)}
             </p>
           </div>
         )}
@@ -106,22 +122,84 @@ export default async function AdminAssetDetailPage({
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-500">Name</p>
-                  <p className="font-medium text-gray-900">{asset.users?.name}</p>
+                  <p className="font-medium text-gray-900">{asset.users?.full_name || 'Unknown'}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500">Email</p>
                   <p className="font-medium text-gray-900">{asset.users?.email}</p>
                 </div>
-                {asset.users?.company && (
+                {asset.users?.company_name && (
                   <div>
                     <p className="text-sm text-gray-500">Company</p>
-                    <p className="font-medium text-gray-900">{asset.users.company}</p>
+                    <p className="font-medium text-gray-900">{asset.users.company_name}</p>
                   </div>
                 )}
                 {asset.users?.phone && (
                   <div>
                     <p className="text-sm text-gray-500">Phone</p>
                     <p className="font-medium text-gray-900">{asset.users.phone}</p>
+                  </div>
+                )}
+                {asset.users?.linkedin_url && (
+                  <div>
+                    <p className="text-sm text-gray-500">LinkedIn</p>
+                    <a
+                      href={asset.users.linkedin_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-green-600 hover:text-green-700"
+                    >
+                      View Profile →
+                    </a>
+                  </div>
+                )}
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Asset Details */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Asset Details</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {asset.issuer_name && (
+                  <div>
+                    <p className="text-sm text-gray-500">Issuer</p>
+                    <p className="font-medium text-gray-900">{asset.issuer_name}</p>
+                  </div>
+                )}
+                {asset.issuer_jurisdiction && (
+                  <div>
+                    <p className="text-sm text-gray-500">Jurisdiction</p>
+                    <p className="font-medium text-gray-900">{asset.issuer_jurisdiction}</p>
+                  </div>
+                )}
+                {asset.fund_structure && (
+                  <div>
+                    <p className="text-sm text-gray-500">Fund Structure</p>
+                    <p className="font-medium text-gray-900">{asset.fund_structure}</p>
+                  </div>
+                )}
+                {asset.minimum_investment && (
+                  <div>
+                    <p className="text-sm text-gray-500">Minimum Investment</p>
+                    <p className="font-medium text-gray-900">
+                      {formatCompactCurrency(asset.minimum_investment / 100)}
+                    </p>
+                  </div>
+                )}
+                {asset.target_yield && (
+                  <div>
+                    <p className="text-sm text-gray-500">Target Yield</p>
+                    <p className="font-medium text-gray-900">{asset.target_yield}%</p>
+                  </div>
+                )}
+                {asset.term_months && (
+                  <div>
+                    <p className="text-sm text-gray-500">Term</p>
+                    <p className="font-medium text-gray-900">{asset.term_months} months</p>
                   </div>
                 )}
               </div>
@@ -140,10 +218,30 @@ export default async function AdminAssetDetailPage({
             </Card>
           )}
 
-          {/* Admin Controls */}
+          {/* Scoring Form - for assets being reviewed */}
+          {showScoringForm && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Qualification Scoring</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ScoringForm asset={asset} />
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Score Breakdown - for completed assets */}
+          {showScoreBreakdown && scoreBreakdown && (
+            <div>
+              <h2 className="text-lg font-semibold text-gray-900 mb-4">Qualification Results</h2>
+              <ScoreBreakdownCard breakdown={scoreBreakdown} showInternalDetails />
+            </div>
+          )}
+
+          {/* Admin Controls - always visible for status changes */}
           <Card>
             <CardHeader>
-              <CardTitle>Admin Controls</CardTitle>
+              <CardTitle>Status & Feedback</CardTitle>
             </CardHeader>
             <CardContent>
               <AdminAssetForm asset={asset} />
@@ -169,12 +267,22 @@ export default async function AdminAssetDetailPage({
                         </svg>
                         <div>
                           <p className="text-sm font-medium text-gray-900">{doc.name}</p>
-                          <p className="text-xs text-gray-500">{formatDateTime(doc.created_at)}</p>
+                          <p className="text-xs text-gray-500">
+                            {doc.category} • {formatDateTime(doc.uploaded_at)}
+                          </p>
                         </div>
                       </div>
-                      <button className="text-blue-600 hover:text-blue-700 text-sm font-medium">
-                        Download
-                      </button>
+                      <div className="flex items-center gap-2">
+                        <Badge
+                          variant={doc.status === 'approved' ? 'success' : doc.status === 'rejected' ? 'error' : 'default'}
+                          size="sm"
+                        >
+                          {doc.status}
+                        </Badge>
+                        <button className="text-green-600 hover:text-green-700 text-sm font-medium">
+                          Download
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -189,24 +297,56 @@ export default async function AdminAssetDetailPage({
 
         {/* Sidebar */}
         <div className="space-y-6">
-          {/* Current Results */}
+          {/* Quick Score Summary */}
+          {asset.score !== null && (
+            <Card>
+              <CardHeader>
+                <CardTitle>Score Summary</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-center gap-6">
+                  <div className="text-center">
+                    <p className="text-4xl font-bold text-gray-900">{asset.score}</p>
+                    <p className="text-sm text-gray-500">Overall Score</p>
+                  </div>
+                  {asset.grade && (
+                    <div className="text-center">
+                      <p className="text-4xl font-bold text-gray-900">{asset.grade}</p>
+                      <p className="text-sm text-gray-500">Grade</p>
+                    </div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Document Request */}
+          {(asset.status === 'submitted' || asset.status === 'in_review') && (
+            <DocumentRequestForm assetId={asset.id} assetName={asset.name} />
+          )}
+
+          {/* Timeline Dates */}
           <Card>
             <CardHeader>
-              <CardTitle>Current Results</CardTitle>
+              <CardTitle>Timeline</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-gray-500">Score</p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {asset.score !== null ? asset.score : '-'}
-                  </p>
+              <div className="space-y-3 text-sm">
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Submitted</span>
+                  <span className="text-gray-900">{asset.submitted_at ? formatDate(asset.submitted_at) : '-'}</span>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-500">Grade</p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {asset.grade || '-'}
-                  </p>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Review Started</span>
+                  <span className="text-gray-900">{asset.review_started_at ? formatDate(asset.review_started_at) : '-'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Qualified</span>
+                  <span className="text-gray-900">{asset.qualification_completed_at ? formatDate(asset.qualification_completed_at) : '-'}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Sent to Distribution</span>
+                  <span className="text-gray-900">{asset.sent_to_distribution_at ? formatDate(asset.sent_to_distribution_at) : '-'}</span>
                 </div>
               </div>
             </CardContent>
@@ -225,12 +365,10 @@ export default async function AdminAssetDetailPage({
                       {index !== activityLog.length - 1 && (
                         <div className="absolute left-[9px] top-6 bottom-0 w-0.5 bg-gray-200" />
                       )}
-                      <div className="absolute left-0 top-1 w-4 h-4 rounded-full bg-blue-100 border-2 border-blue-600" />
+                      <div className="absolute left-0 top-1 w-4 h-4 rounded-full bg-green-100 border-2 border-green-600" />
                       <div>
-                        <p className="font-medium text-gray-900 text-sm">{activity.action}</p>
-                        {activity.details && (
-                          <p className="text-sm text-gray-600">{activity.details}</p>
-                        )}
+                        <p className="font-medium text-gray-900 text-sm">{activity.activity_type.replace(/_/g, ' ')}</p>
+                        <p className="text-sm text-gray-600">{activity.description}</p>
                         <p className="text-xs text-gray-400 mt-1">
                           {formatDateTime(activity.created_at)}
                         </p>
